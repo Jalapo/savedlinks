@@ -1,0 +1,19 @@
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    height: 3em;
+    flex-grow: 1;
+}
+
+.list {
+    flex-grow: 1;
+}
+
+.link-input-bar {
+    height: 2em;
+}
