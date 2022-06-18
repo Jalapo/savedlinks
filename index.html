@@ -6,26 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SavedLinks</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="tools.js"></script>
 </head>
 <body>
-    <div class="navbar">
-        <div class="login">Login</div> <!--  ≡ -->
+    <nav class="navbar">
+        <div class="login"> <span class="click">Login</span></div> <!--  ≡ -->
         <div class="register">Register</div>
-    </div>
+    </nav>
 
+<!--
     <div class="list">
-        <ul class="list-items">
-            <li>Link 1</li>
-            <li>Link 2</li>
-            <li>Link 3</li>
-            <li>Link 4</li>
-        </ul>
+        <div id="urlList">
+            <p>Link 1</p>
+            <p>Link 2</p>
+            <p>Link 3</p>
+            <p>Link 4</p>
+        </div>
+
+        <div id="buttonList">
+            <button></button>
+        </div>
+
+        <div id="delButtonList">
+            <button></button>
+        </div>
+
+
+        
+    </div>
+-->
+
+    <div class="links-container">
+        <div class="box click" onclick="window.open('https://' + document.querySelector('div>div>span').innerHTML)">
+            <div class="urlTextBox">
+                <div class="urlTitle">Google</div>
+                <span class="click">google.com</span>
+            </div>
+            <div class="editURL"><button class="click">✎</button></div>
+            <div class="delURL"><button id="btn" class="click">X</button></div>
+        </div>
+
+        <div class="box">
+            <div class="urlTextBox">google.com</div>
+            <div class="editURL"><button class="click">✎</button></div>
+            <div class="delURL"><button class="click">X</button></div>
+        </div>
+
+        <div class="box">
+            <div class="urlTextBox">google.com</div>
+            <div class="editURL"><button class="click">✎</button></div>
+            <div class="delURL"><button class="click">X</button></div>
+        </div>
+        
+        <div class="box">
+            <div class="urlTextBox">google.com</div>
+            <div class="editURL"><button class="click">✎</button></div>
+            <div class="delURL"><button class="click">X</button></div>
+        </div>
+        
     </div>
 
     <div class="link-input-bar">
-        <input type="url">
-        <button></button>
+        <input type="url" placeholder="www.google.com" >
+        <button class="click" onclick="addLink()">+</button>
     </div>
+
+    <div class="hidden" id="debug-bar">_</div>
+
 </body>
 </html>
