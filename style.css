@@ -147,6 +147,7 @@ body {
     flex: 1 1 auto;
     display: flex;
     justify-content: space-around;
+    text-align:center;
 }
 
 .urlTextBox>span {
@@ -223,14 +224,15 @@ input:focus {
 
 
 @media screen and (pointer: coarse) and (hover: none) {
-    body {
-        -webkit-text-size-adjust: 100%;
+    .boxButtons button {
+        text-align: center;
     }
 }
 
 @media (max-width:480px) {
     html, body {
         font-size: 1.2rem;
+        -webkit-text-size-adjust: 100%;
     }
 }
 
