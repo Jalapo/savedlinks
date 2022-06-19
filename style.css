@@ -2,14 +2,15 @@ html, body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1.5em;
 }
 
 body {
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 20, 80, 1)
+    /* background-color: rgba(0, 20, 80, 1); */
+    background-color: #000E;
 }
 
 .navbar {
@@ -99,18 +100,23 @@ body {
 
 .box {
 
-    border: 0.25rem groove #BBBBBB;
+    border: 0.25rem groove #6e93f7;
     border-radius: 1.5rem;
-    background-color: #DDDDDD;
+    /* background-color: #DDDDDD; */
+    background-color: rgb(0, 32, 128);
+    color: lightblue;
     width: 14rem;
     height: 14rem;
     font-size: 1rem;
+    /*
     display: grid;
     grid-template-rows: 60% 40%;
     grid-template-columns: 50% 50%;
     grid-template-areas:    "a a"
                             "b c";
-    
+                            */
+    display: flex;
+    flex-direction: column;
 }
 
 .box button {
@@ -119,17 +125,28 @@ body {
     border-radius: 3rem;
     font-size: 1.7rem;
     font-weight: 600;
-    background-color: #333333;
+    background-color: #1d1d1d;
     border: 0.11rem solid #000000;
 }
 
 .urlTextBox {
-    grid-area: a;
+    /* grid-area: a; */
+    flex: 1 1 initial;
+    display: inline-block;
     text-align: center;
-    height: min-content;
+    margin-top: 4rem;
+    margin-bottom: 0.5rem;
+    height: 30%;
+    width: 100%;
     font-size: 1.4rem;
     font-weight: 700;
     align-self: center;
+}
+
+.boxButtons {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-around;
 }
 
 .urlTextBox>span {
@@ -139,7 +156,7 @@ body {
 
 .editURL {
     text-align: right;
-    margin-right: 1.1rem;
+    /* margin-right: 1.1rem; */
 }
 
 .editURL>button {
@@ -148,7 +165,7 @@ body {
 
 .delURL {
     text-align: left;
-    margin-left: 1.1rem;
+    /* margin-left: 1.1rem; */
 }
 
 .delURL>button {
@@ -210,5 +227,29 @@ input:focus {
 
     html, body {
         font-size: 1.2rem;
+    }
+}
+
+@media (max-height: 570px) {
+    .box {
+        width: 100%;
+        height: clamp(3.2rem, 25vh, 80%);
+        flex-direction: row;
+    }
+
+    .urlTextBox {
+        text-align: start;
+        padding-left: 1rem;
+        height: fit-content;
+    }
+
+    .boxButtons {
+        gap: 1.5rem;
+        padding-right: 1rem;
+    } 
+    .box>* {
+        margin: 0;
+        align-self:center;
+        /* border: 1px solid green; */
     }
 }
