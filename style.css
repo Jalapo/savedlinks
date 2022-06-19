@@ -222,9 +222,13 @@ input:focus {
 }
 
 
+@media screen and (pointer: coarse) and (hover: none) {
+    body {
+        -webkit-text-size-adjust: 100%;
+    }
+}
 
 @media (max-width:480px) {
-
     html, body {
         font-size: 1.2rem;
     }
