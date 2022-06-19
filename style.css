@@ -122,6 +122,7 @@ body {
 .box button {
     width: 2.5rem;
     height: 2.5rem;
+    padding: 0;
     border-radius: 3rem;
     font-size: 1.7rem;
     font-weight: 600;
@@ -199,6 +200,7 @@ body {
 .link-input-bar>button {
     flex: 1 1 initial;
     font-size: 20px;
+    padding: 0;
     width: 2.5em;
     height: 2.5em;
     border-radius: 4em;
@@ -222,17 +224,17 @@ input:focus {
     font-size: 0rem;
 }
 
-
+/*
 @media screen and (pointer: coarse) and (hover: none) {
     .boxButtons button {
-        text-align: center;
+        /* text-align: center;
     }
 }
-
+*/
 @media (max-width:480px) {
     html, body {
         font-size: 1.2rem;
-        -webkit-text-size-adjust: 100%;
+        /* -webkit-text-size-adjust: 100%; */
     }
 }
 
