@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
-    <title>SavedLinks</title>
+    <title>Saved Links</title>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="tools.js"></script>
@@ -16,69 +16,11 @@
         <div class="register">Register</div>
     </nav>
 
-<!--
-    <div class="list">
-        <div id="urlList">
-            <p>Link 1</p>
-            <p>Link 2</p>
-            <p>Link 3</p>
-            <p>Link 4</p>
-        </div>
-
-        <div id="buttonList">
-            <button></button>
-        </div>
-
-        <div id="delButtonList">
-            <button></button>
-        </div>
-
-
-        
-    </div>
--->
-
-    <div class="links-container">
-        <div class="box click" onclick="window.open('https://' + document.querySelector('div>div>span').innerHTML)">
-            <div class="urlTextBox">
-                <div class="urlTitle">Google</div>
-                <span class="click">google.com</span>
-            </div>
-            <div class="boxButtons">
-                <div class="editURL"><button class="click">✎</button></div>
-                <div class="delURL"><button id="btn" class="click">X</button></div>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="urlTextBox">google.com</div>
-            <div class="boxButtons">
-                <div class="editURL"><button class="click">✎</button></div>
-                <div class="delURL"><button id="btn" class="click">X</button></div>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="urlTextBox">google.com</div>
-            <div class="boxButtons">
-                <div class="editURL"><button class="click">✎</button></div>
-                <div class="delURL"><button id="btn" class="click">X</button></div>
-            </div>
-        </div>
-        
-        <div class="box">
-            <div class="urlTextBox">google.com</div>
-            <div class="boxButtons">
-                <div class="editURL"><button class="click">✎</button></div>
-                <div class="delURL"><button id="btn" class="click">X</button></div>
-            </div>
-        </div>
-        
-    </div>
+    <div class="links-container"></div>
 
     <div class="link-input-bar">
         <input type="url" placeholder="www.google.com" >
-        <button class="click" onclick="addLink()">+</button>
+        <button class="click">+</button>
     </div>
 
     <div class="hidden" id="debug-bar">_</div>

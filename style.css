@@ -90,7 +90,7 @@ body {
     flex-grow: 1;
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
     padding: 1rem;
     overflow-y: auto;
     justify-content: space-around;
@@ -126,8 +126,11 @@ body {
     border-radius: 3rem;
     font-size: 1.7rem;
     font-weight: 600;
-    background-color: #1d1d1d;
-    border: 0.11rem solid #000000;
+    /* background-color: #1d1d1d; */
+    /* border: 0.11rem solid #000000; */
+    background-color: rgba(0,0,0, 0.5);
+    border: none;
+    cursor: default;
 }
 
 .urlTextBox {
@@ -224,17 +227,9 @@ input:focus {
     font-size: 0rem;
 }
 
-/*
-@media screen and (pointer: coarse) and (hover: none) {
-    .boxButtons button {
-        /* text-align: center;
-    }
-}
-*/
 @media (max-width:480px) {
     html, body {
         font-size: 1.2rem;
-        /* -webkit-text-size-adjust: 100%; */
     }
 }
 
@@ -258,6 +253,5 @@ input:focus {
     .box>* {
         margin: 0;
         align-self:center;
-        /* border: 1px solid green; */
     }
 }

@@ -2,7 +2,35 @@ let links = [];
 
 window.onload = () => {
     getLinks();
-    setupEvents();
+    setTimeout(setupEvents, 100);
+    // setupEvents();
+}
+
+function setupEvents() {
+    editBtns = document.querySelectorAll(".editURL > button");
+    delBtns = document.querySelectorAll(".delURL > button");
+    urlBar = document.querySelector(".link-input-bar > input");
+    addBtn = document.querySelector(".link-input-bar > button");
+
+    addBtn.addEventListener("click", addLink);
+    urlBar.addEventListener("keypress", (ev) => {
+        if (ev.key === "Enter") addLink();
+    })
+
+    for (let i = 0; i < delBtns.length; i++) {
+        delBtns[i].addEventListener("click", (ev) =>{
+            delClick();
+            ev.stopPropagation();
+        })
+    }
+
+    for (let i = 0; i < editBtns.length; i++) {
+        console.log(editBtns[i]);
+        editBtns[i].addEventListener("click", (ev) =>{
+            editClick();
+            ev.stopPropagation();
+        })
+    }
 }
 
 function getLinks(id = 0) {     // gather links from specific .db file
@@ -12,7 +40,7 @@ function getLinks(id = 0) {     // gather links from specific .db file
             for (let i = 0; i < userdb.length; i++) {
                 links.push(userdb[i]);
             }
-            // readLinks();
+             readLinks();
         })
 
         .catch((error) => {
@@ -21,7 +49,7 @@ function getLinks(id = 0) {     // gather links from specific .db file
 
 }
 
-function addLink() {
+function addLink() { // functionality of add link button
     urlBar = document.querySelector(".link-input-bar > input");
     if (urlBar.value) {
         links.push({url : urlBar.value});
@@ -33,53 +61,28 @@ function addLink() {
 
 function readLinks() {
     // clear bookmarks from view
-    let list = document.querySelector("#urlList");
+    let list = document.querySelector(".links-container");
     while (list.firstChild) {list.removeChild(list.firstChild);}
 
     // display each bookmark in 'links' array
     for (let i = 0; i < links.length; i++) {
-        let elm = document.createElement("li");
-        let elmTxt = links[i].name ?
-            document.createTextNode(links[i].name) : document.createTextNode(links[i].url);
-        elm.appendChild(elmTxt);
-        elm.classList.add("click");
-        elm.addEventListener("click", () => {window.open("https://" + links[i].url);})
-        document.querySelector("#list-items").appendChild(elm);
+        box = createBookmarkBox(links[i]);
+        document.querySelector(".links-container").appendChild(box);
     }
 }
 
-function addButton() {  // add button to url box
-    const list = document.querySelector("#urlList");
-    // list.querySelector
-}
-
-function createBookmarkBox() {
-    let box = document.createElement("div");
-
-    let urlTextDiv = document.createElement("div");
-    let urlTitle = document.createElement("div");
-    let urlText = document.createElement("span")
-
-    let editDiv = document.createElement("div");
-    let delDiv = document.createElement("div");
-
-    let
-}
 
 
-function setupEvents() {
-    document.getElementById("btn").addEventListener("click", (ev) => {
-        // delClick();
-        alert("test event");
-        ev.stopPropagation();
-    })
-}
 
 
 function openLink() {
-    
+
+}
+
+function editClick() {
+    alert("clicked edit");
 }
 
 function delClick() {
-        alert("hello");
+    alert("hello");
 }
