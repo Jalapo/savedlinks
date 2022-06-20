@@ -9,8 +9,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    /* background-color: rgba(0, 20, 80, 1); */
-    background-color: #000E;
+    background-color: hsl(0, 0%, 6%)
 }
 
 .navbar {
@@ -25,6 +24,7 @@ body {
     align-items: center;
     padding: 0.4rem 2rem 0.4rem 0rem;
     background-color: rgba(0,0,0, 1);
+    background-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 30%, hsl(0, 0%, 3%) 100%);
     color: #BBBBBB;
 }
 /*
@@ -93,28 +93,20 @@ body {
     gap: 2rem;
     padding: 1rem;
     overflow-y: auto;
-    justify-content: space-around;
+    justify-content: space-evenly;
     justify-items: center;
     align-items: center;
 }
 
 .box {
 
-    border: 0.25rem groove #6e93f7;
+    border: 0.25rem solid hsl(230, 75%, 5%);
     border-radius: 1.5rem;
-    /* background-color: #DDDDDD; */
-    background-color: rgb(0, 32, 128);
+    background-image: linear-gradient(to bottom, hsl(238, 85%, 35%) 0%, hsl(238, 85%, 30%) 20%, hsl(238, 85%, 2%) 100%);
     color: lightblue;
     width: 14rem;
     height: 14rem;
     font-size: 1rem;
-    /*
-    display: grid;
-    grid-template-rows: 60% 40%;
-    grid-template-columns: 50% 50%;
-    grid-template-areas:    "a a"
-                            "b c";
-                            */
     display: flex;
     flex-direction: column;
 }
@@ -123,18 +115,15 @@ body {
     width: 2.5rem;
     height: 2.5rem;
     padding: 0;
-    border-radius: 3rem;
     font-size: 1.7rem;
     font-weight: 600;
-    /* background-color: #1d1d1d; */
-    /* border: 0.11rem solid #000000; */
-    background-color: rgba(0,0,0, 0.5);
+    background-image: linear-gradient(to bottom, hsl(238, 85%, 10%) 0%, hsl(238, 85%, 4%) 100%);
     border: none;
+    border-radius: 3rem;
     cursor: default;
 }
 
 .urlTextBox {
-    /* grid-area: a; */
     flex: 1 1 initial;
     display: inline-block;
     text-align: center;
@@ -161,7 +150,6 @@ body {
 
 .editURL {
     text-align: right;
-    /* margin-right: 1.1rem; */
 }
 
 .editURL>button {
@@ -170,7 +158,6 @@ body {
 
 .delURL {
     text-align: left;
-    /* margin-left: 1.1rem; */
 }
 
 .delURL>button {
@@ -194,7 +181,7 @@ body {
     height: 3em;
     border-radius: 4em;
     border: 0.2rem solid transparent;
-    background-color: rgba(180,180,180,0.6);
+    background-color: hsl(0, 0%, 44%);
     size: 2rem;
     text-indent: 1.5rem;
 
@@ -208,7 +195,7 @@ body {
     height: 2.5em;
     border-radius: 4em;
     border-color: transparent;
-    background-color: rgb(250, 176, 39);
+    background-color: hsl(39, 95%, 57%);
 }
 
 input:focus {
@@ -231,13 +218,48 @@ input:focus {
     html, body {
         font-size: 1.2rem;
     }
+    
+    .links-container {
+        gap: 4vh;
+        justify-content:flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+
+    .box {
+        width: 100%;
+        height: clamp(4rem, 25vh, 15%);
+        padding: 2rem auto;
+        flex-direction: row;
+
+    }
+
+    .urlTextBox {
+        text-align: start;
+        padding-left: 1rem;
+        height: fit-content;
+    }
+
+    .boxButtons {
+        gap: 1.5rem;
+        padding-right: 1rem;
+    } 
+    .box>* {
+        margin: 0;
+        align-self:center;
+    }
 }
 
 @media (max-height: 570px) {
+
     .box {
         width: 100%;
         height: clamp(3.2rem, 25vh, 80%);
+        /* height: fit-content; */
+        /* padding: 0.2rem 2rem 2rem auto; */
         flex-direction: row;
+
     }
 
     .urlTextBox {
