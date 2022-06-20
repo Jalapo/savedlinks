@@ -214,7 +214,7 @@ input:focus {
     font-size: 0rem;
 }
 
-@media (max-width:480px) {
+@media (max-width:800px) {
     html, body {
         font-size: 1.2rem;
     }
