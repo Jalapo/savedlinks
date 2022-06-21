@@ -19,7 +19,7 @@ function setupEvents() {
 
     for (let i = 0; i < delBtns.length; i++) {
         delBtns[i].addEventListener("click", (ev) =>{
-            delClick();
+            delClick(i);
             ev.stopPropagation();
         })
     }
@@ -27,7 +27,7 @@ function setupEvents() {
     for (let i = 0; i < editBtns.length; i++) {
         console.log(editBtns[i]);
         editBtns[i].addEventListener("click", (ev) =>{
-            editClick();
+            editClick(i);
             ev.stopPropagation();
         })
     }
@@ -79,10 +79,12 @@ function openLink() {
 
 }
 
-function editClick() {
+function editClick(boxNum) {
     alert("clicked edit");
 }
 
-function delClick() {
-    alert("hello");
+function delClick(boxNum) {
+    links.splice(boxNum, 1);
+    readLinks();
+    setupEvents();
 }
