@@ -93,10 +93,30 @@ body {
     gap: 2rem;
     padding: 1rem;
     overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: hsl(0, 0%, 10%) hsl(0, 0%, 0%);
     justify-content: space-evenly;
     justify-items: center;
-    align-items: center;
+    align-items: center;   
 }
+ /* scrollbar for modern webkit browsers */
+::-webkit-scrollbar {
+    width: auto;
+}
+
+    /* Scroll track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px hsl(0, 0%, 0%);
+    border-radius: 16px;
+  }
+  
+  /* Click Handle */
+  ::-webkit-scrollbar-thumb {
+    background: hsl(215, 58%, 6%);
+    border-radius: 16px;
+  }
+/*--------------------------------*/
+
 
 .box {
 
