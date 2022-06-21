@@ -9,7 +9,8 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: hsl(0, 0%, 6%)
+    /* background-color: hsl(218, 30%, 5%); */
+    background-color: hsl(218, 50%, 10%);
 }
 
 .navbar {
@@ -19,72 +20,15 @@ body {
     display: grid;
     grid: '. .';
     gap: 2rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    font-weight: 650;
     justify-content: right;
     align-items: center;
     padding: 0.4rem 2rem 0.4rem 0rem;
-    background-color: rgba(0,0,0, 1);
-    background-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 30%, hsl(0, 0%, 3%) 100%);
-    color: #BBBBBB;
+    background-color: hsl(218, 50%, 10%);
+    /* background-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 30%, hsl(218, 70%, 10%) 100%); */
+    color: hsl(90, 30%, 73%);
 }
-/*
-.list {
-    flex-grow: 1;
-    display: grid;
-    /* grid-template-rows: 1;
-    grid-template-columns: 80% 10% 10%;
-    gap: 0px;
-}
-
-.list>* {
-    border: 2px solid red;
-}
-
-#urlList {
-    overflow-y: auto;
-}
-
-#urlList>* {
-    overflow-x: hidden;
-    border-bottom: 1px solid black;
-    padding-left: 0.15em;
-    padding-top: 0em;
-}
-
-#buttonList button {
-    width: 1.2rem;
-    height: 1rem;
-}
-
-#buttonList li {
-    align-items: center;
-    border: 1px solid red;
-}
-
-.list li:hover {
-    overflow-x: auto;
-}
-
-#urlList:first-child {
-    border-top: 1px solid black;
-}
-*/
-
-
-
-/*
-.links-container {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
-    justify-content: space-around;
-    justify-items: center;
-    padding: 1rem;
-    overflow-y: auto;
-    align-items: center;
-}
-*/
 
 .links-container {
     flex-grow: 1;
@@ -171,9 +115,11 @@ body {
     justify-content: center;
     column-gap: 1.5rem;
     row-gap: 0.5rem;
-    padding: 1em;
+    padding: 0.5em;
     /* background-color: #666666; */ 
-    background-color: #0005;
+    /* background-color: #0005; */
+    background-color: hsl(218, 50%, 15%);
+    border-radius: 0.7rem 0.7rem 0rem 0rem;
 }
 
 .link-input-bar>input {
@@ -181,7 +127,7 @@ body {
     height: 3em;
     border-radius: 4em;
     border: 0.2rem solid transparent;
-    background-color: hsl(0, 0%, 44%);
+    background-color: hsl(200, 25%, 30%);
     size: 2rem;
     text-indent: 1.5rem;
 
