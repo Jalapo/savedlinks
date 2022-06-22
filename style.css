@@ -46,6 +46,7 @@ body {
  /* scrollbar for modern webkit browsers */
 ::-webkit-scrollbar {
     width: auto;
+    margin-bottom: 2rem;
 }
 
     /* Scroll track */
@@ -136,6 +137,7 @@ body {
     column-gap: 1.5rem;
     row-gap: 0.5rem;
     padding: 0.5em;
+    margin-top: 0.2rem; /* trying to fix awkward scrollbar length */
     /* background-color: #666666; */ 
     /* background-color: #0005; */
     background-color: hsl(218, 50%, 15%);
@@ -161,7 +163,7 @@ body {
     height: 2.5em;
     border-radius: 4em;
     border-color: transparent;
-    background-color: hsl(39, 95%, 57%);
+    background-color: hsl(50, 75%, 57%);
 }
 
 input:focus {

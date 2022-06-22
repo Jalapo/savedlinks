@@ -3,7 +3,6 @@ let links = [];
 window.onload = () => {
     getLinks();
     setTimeout(setupEvents, 100);
-    // setupEvents();
 }
 
 function setupEvents() {
@@ -56,6 +55,7 @@ function addLink() { // functionality of add link button
         console.log(links[-1]);
         console.log(urlBar.value);
         readLinks();
+        setupEvents();
     }
 }
 
