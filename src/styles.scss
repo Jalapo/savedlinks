@@ -1,0 +1,272 @@
+$desktop: 800px;
+@mixin hidden {
+    margin: 0rem;
+    padding: 0rem;
+    height: 0rem;
+    width: 0rem;
+    font-size: 0rem;
+}
+
+@mixin click {
+    cursor: pointer;
+}
+
+html {
+    height: 100%;
+    font-family: system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.2rem;
+    margin: 0px;
+    padding: 0px;
+    @media screen and (min-width: $desktop) {
+        font-size: 1.5rem;
+    }
+
+    body {
+        @extend html;
+        display: flex;
+        flex-direction: column;
+        background-color: hsl(218, 50%, 10%);
+    }
+
+}
+
+.navbar {
+    font-family: 'Times New Roman', Times, serif;
+    height: 2.5rem;
+    flex: 0 0 1;
+    display: flex;
+    gap: 2rem;
+    font-size: 1.5rem;
+    font-weight: 650;
+    justify-content: right;
+    align-items: center;
+    padding: 0.4rem 2rem 0.4rem 0rem;
+    background-color: hsl(218, 50%, 10%);
+    /* background-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 30%, hsl(218, 70%, 10%) 100%); */
+    color: hsl(90, 30%, 73%);
+    .login, .register {
+        @media screen and (max-width: $desktop) {
+            @include hidden;
+        }
+    }
+    .navbar-button {
+        @media screen and (min-width: $desktop) {
+            @include hidden;
+        }
+    }
+    @media screen and (min-width: $desktop) {
+        font-size: 1rem;
+    }
+
+    span {
+        @include click;
+    }
+}
+
+.links-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 4vh;
+    padding: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: hsl(0, 0%, 10%) hsl(0, 0%, 0%);
+    justify-content: flex-start;
+    justify-items: center;
+    align-items: center;
+    @media screen and (min-width: $desktop) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: space-evenly;
+
+    }
+}
+
+
+
+.box {
+
+    border: 0.25rem solid hsl(230, 75%, 5%);
+    border-radius: 1.5rem;
+    background-image: linear-gradient(to bottom, hsl(238, 85%, 35%) 0%, hsl(238, 85%, 30%) 20%, hsl(238, 85%, 2%) 100%);
+    color: lightblue;
+    width: 100%;
+    height: clamp(4rem, 25vh, 15%);
+    padding: 2rem auto;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    
+    @media screen and (min-width: $desktop) {
+        width: 14rem;
+        height: 14rem;
+        padding: auto;
+        flex-direction: column;
+    }
+
+    * {
+        @media screen and (max-width: $desktop) { // for mobile devices
+            margin: 0;
+            align-self: center;
+        }
+    }
+
+    button {
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0;
+        font-size: 1.7rem;
+        font-weight: 600;
+        background-image: linear-gradient(to bottom, hsl(238, 85%, 10%) 0%, hsl(238, 85%, 4%) 100%);
+        border: none;
+        border-radius: 3rem;
+        cursor: default;
+    }
+
+    .urlTextBox {
+        flex: 1 1 initial;
+        display: inline-block;
+        text-align: start;
+        padding-left: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        height: fit-content;
+        width: 100%;
+        font-size: 1.4rem;
+        font-weight: 700;
+        align-self: center;
+        @media screen and (min-width: $desktop) {
+            text-align: center;
+            padding-left: 0rem;
+            height: 30%;
+            margin-top: 4rem;
+        }
+    
+        span {
+            font-size: 0.8em;
+            font-weight: 1;
+        }
+    }
+    
+    
+    .boxButtons {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: space-around;
+        text-align:center;
+        gap: 1.5rem;
+        padding-right: 1rem;
+        @media screen and (min-width: $desktop) {
+            gap: 0rem;
+            padding-right: 0rem;
+        }
+        
+        .editURL {
+            button {
+                color: orange;
+            }
+        }
+        
+        .delURL {
+            button {
+                color: red;
+            }
+        }
+    }
+
+}
+
+
+
+.link-input-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 1.5rem;
+    row-gap: 0.5rem;
+    padding: 0.5em;
+    margin-top: 0.2rem; /* trying to fix awkward scrollbar length */
+    background-color: hsl(218, 50%, 15%);
+    border-radius: 0.7rem 0.7rem 0rem 0rem;
+
+    input {
+        flex: 1 1 auto;
+        height: 3em;
+        border-radius: 4em;
+        border: 0.1rem solid transparent;
+        background-color: hsl(200, 25%, 30%);
+        size: 2rem;
+        text-indent: 1.5rem;
+        &:focus {
+            border-color: hsl(220, 80%, 70%);
+            outline: none;
+        }
+    }
+
+    button {
+        flex: 1 1 initial;
+        font-size: 20px;
+        padding: 0;
+        width: 2.5em;
+        height: 2.5em;
+        border-radius: 4em;
+        border-color: transparent;
+        background-color: hsl(50, 75%, 57%);
+        @include click;
+    }
+}
+
+
+@media (max-height: 570px) {
+    .navbar {
+        font-size: 1.5rem;
+    }
+
+
+    .box {
+        width: 100%;
+        height: clamp(3.2rem, 25vh, 80%);
+        /* height: fit-content; */
+        /* padding: 0.2rem 2rem 2rem auto; */
+        flex-direction: row;
+
+    }
+
+    .urlTextBox {
+        text-align: start;
+        padding-left: 1rem;
+        height: fit-content;
+    }
+
+    .boxButtons {
+        gap: 1.5rem;
+        padding-right: 1rem;
+    } 
+    .box>* {
+        margin: 0;
+        align-self:center;
+    }
+}
+
+ /* scrollbar for modern webkit browsers */
+ ::-webkit-scrollbar {
+    width: auto;
+    margin-bottom: 2rem;
+}
+
+    /* Scroll track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px hsl(0, 0%, 0%);
+    border-radius: 16px;
+  }
+  
+  /* Click Handle */
+  ::-webkit-scrollbar-thumb {
+    background: hsl(215, 58%, 6%);
+    border-radius: 16px;
+  }
+/*--------------------------------*/
+

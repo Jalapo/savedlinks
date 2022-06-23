@@ -1,4 +1,5 @@
 let links = [];
+const smallScreen = window.matchMedia("(max-width: 800px)");
 
 window.onload = () => {
     getLinks();
@@ -6,15 +7,9 @@ window.onload = () => {
 }
 
 function setupEvents() {
+    initSetup();
     editBtns = document.querySelectorAll(".editURL > button");
     delBtns = document.querySelectorAll(".delURL > button");
-    urlBar = document.querySelector(".link-input-bar > input");
-    addBtn = document.querySelector(".link-input-bar > button");
-
-    addBtn.addEventListener("click", addLink);
-    urlBar.addEventListener("keypress", (ev) => {
-        if (ev.key === "Enter") addLink();
-    })
 
     for (let i = 0; i < delBtns.length; i++) {
         delBtns[i].addEventListener("click", (ev) =>{
@@ -30,6 +25,19 @@ function setupEvents() {
             ev.stopPropagation();
         })
     }
+}
+
+function initSetup() {
+    urlBar = document.querySelector(".link-input-bar > input");
+    addBtn = document.querySelector(".link-input-bar > button");
+
+    addBtn.addEventListener("click", addLink);
+    urlBar.addEventListener("keypress", (ev) => {
+        if (ev.key === "Enter") addLink();
+    })
+
+    smallScreen.addEventListener("change", adjustNav);
+    adjustNav();
 }
 
 function getLinks(id = 0) {     // gather links from specific .db file
@@ -72,7 +80,23 @@ function readLinks() {
 }
 
 
-
+function adjustNav() {
+    let navbar = document.querySelector(".navbar");
+    while (navbar.firstChild) {navbar.removeChild(navbar.firstChild);}
+    if (smallScreen.matches == false) {
+        let login = document.createElement("span");
+        login.appendChild(document.createTextNode("Login"));
+        let register = document.createElement("span");
+        register.appendChild(document.createTextNode("Register"));
+        navbar.appendChild(document.createElement("div").appendChild(login));
+        navbar.appendChild(document.createElement("div").appendChild(register));
+        
+    } else {
+        let nbExpand = document.createElement("span");
+        nbExpand.appendChild(document.createTextNode("≡"));
+        navbar.appendChild(document.createElement("div").appendChild(nbExpand));
+    }
+}
 
 
 function openLink() {
