@@ -17,10 +17,9 @@ body {
     font-family: 'Times New Roman', Times, serif;
     height: 2.5rem;
     flex: 0 0 1;
-    display: grid;
-    grid: '. .';
+    display: flex;
     gap: 2rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 650;
     justify-content: right;
     align-items: center;
@@ -182,6 +181,12 @@ input:focus {
     font-size: 0rem;
 }
 
+@media screen and (min-width:800px) {
+    .navbar {
+        font-size: 1rem;
+    }
+}
+
 @media (max-width:800px) {
     html, body {
         font-size: 1.2rem;
@@ -219,7 +224,12 @@ input:focus {
     }
 }
 
+
 @media (max-height: 570px) {
+    .navbar {
+        font-size: 1.5rem;
+    }
+
 
     .box {
         width: 100%;
