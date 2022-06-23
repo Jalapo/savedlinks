@@ -7,14 +7,14 @@
     <meta name="theme-color" content="#000000">
     <meta property="og:image" content="src/svlinks_logo.png" />
     <title>Saved Links</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="src/styles.css">
     <script type="text/javascript" src="tools.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
     <nav class="navbar">
-        <div class="login"> <span class="click">Login</span></div> <!--shrink these to  `≡`  on mobile devices -->
-        <div class="register"><span class="click">Register</span></div>
+        <div class="navbar-button"><span class="click">≡</span></div>
     </nav>
 
     <div class="links-container"></div>
@@ -23,8 +23,6 @@
         <input type="url" placeholder="www.google.com" >
         <button class="click">+</button>
     </div>
-
-    <div class="hidden" id="debug-bar">_</div>
 
 </body>
 </html>
