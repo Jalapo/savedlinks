@@ -1,4 +1,4 @@
-function createBookmarkBox(link) {
+function createBookmarkBox(link) { // creates DOM for bookmark boxes
     let box = document.createElement("div");
 
     let urlTextDiv = document.createElement("div");
@@ -50,7 +50,23 @@ function createBookmarkBox(link) {
                 */
 }
 
-function getFile(filename, type="text") {
+function getLinks(id = 0) {     // gather links from specific .db file
+    getFile(id + ".db", "json")
+        .then((response) => {
+            const userdb = response.links;
+            for (let i = 0; i < userdb.length; i++) {
+                links.push(userdb[i]);
+            }
+             readLinks();
+        })
+
+        .catch((error) => {
+            console.log("Resolve Error: %s", error);
+        });
+
+}
+
+function getFile(filename, type="text") { // fetches file
     return new Promise((resolve, reject) => {
         const xmlhttp = new XMLHttpRequest();
 
@@ -67,4 +83,10 @@ function getFile(filename, type="text") {
         xmlhttp.open("GET", filename, true);
         xmlhttp.send();
     });
+}
+
+function clear(obj) { // removes all children from object
+    while (obj.firstChild) {
+        obj.removeChild(obj.firstChild);
+    }
 }
