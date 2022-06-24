@@ -179,7 +179,7 @@ html {
 
 
 
-.link-input-bar {
+.bottomBar {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -190,7 +190,7 @@ html {
     background-color: hsl(218, 50%, 15%);
     border-radius: 0.7rem 0.7rem 0rem 0rem;
 
-    input {
+    input[type=url] {
         flex: 1 1 auto;
         height: 3em;
         border-radius: 4em;

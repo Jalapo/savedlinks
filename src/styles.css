@@ -231,7 +231,7 @@ html body {
   color: red;
 }
 
-.link-input-bar {
+.bottomBar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -250,7 +250,7 @@ html body {
   border-radius: 0.7rem 0.7rem 0rem 0rem;
 }
 
-.link-input-bar input {
+.bottomBar input[type=url] {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
@@ -262,12 +262,12 @@ html body {
   text-indent: 1.5rem;
 }
 
-.link-input-bar input:focus {
+.bottomBar input[type=url]:focus {
   border-color: #759ef0;
   outline: none;
 }
 
-.link-input-bar button {
+.bottomBar button {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 initial;
           flex: 1 1 initial;

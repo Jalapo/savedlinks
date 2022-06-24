@@ -10,8 +10,8 @@ window.onload = () => { // setup
 }
 
 function initSetup() {
-    urlBar = document.querySelector(".link-input-bar > input");
-    addBtn = document.querySelector(".link-input-bar > button");
+    urlBar = document.querySelector(".bottomBar > input");
+    addBtn = document.querySelector(".bottomBar > button");
 
     addBtn.addEventListener("click", addLink);
     urlBar.addEventListener("keypress", (ev) => {
@@ -42,7 +42,7 @@ function setupEvents() {
 }
 
 function addLink() { // functionality of add link button
-    urlBar = document.querySelector(".link-input-bar > input");
+    urlBar = document.querySelector(".bottomBar > input");
     if (urlBar.value) {
         links.push({url : urlBar.value});
         console.log(links[-1]);
