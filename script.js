@@ -1,30 +1,12 @@
 let links = [];
-const smallScreen = window.matchMedia("(max-width: 800px)");
+const viewBreakpoint = window.matchMedia("(max-width: 800px), (max-height: 570px)");
+// const thinTab = window.matchMedia("(max-height: 570px)");
+let view = "list";
 
-window.onload = () => {
+window.onload = () => { // setup
     getLinks();
+    setTimeout(initSetup, 100);
     setTimeout(setupEvents, 100);
-}
-
-function setupEvents() {
-    initSetup();
-    editBtns = document.querySelectorAll(".editURL > button");
-    delBtns = document.querySelectorAll(".delURL > button");
-
-    for (let i = 0; i < delBtns.length; i++) {
-        delBtns[i].addEventListener("click", (ev) =>{
-            delClick(i);
-            ev.stopPropagation();
-        })
-    }
-
-    for (let i = 0; i < editBtns.length; i++) {
-        console.log(editBtns[i]);
-        editBtns[i].addEventListener("click", (ev) =>{
-            editClick(i);
-            ev.stopPropagation();
-        })
-    }
 }
 
 function initSetup() {
@@ -36,24 +18,27 @@ function initSetup() {
         if (ev.key === "Enter") addLink();
     })
 
-    smallScreen.addEventListener("change", adjustNav);
-    adjustNav();
+    viewBreakpoint.addEventListener("change", adjustScreen);
+    adjustScreen();
 }
 
-function getLinks(id = 0) {     // gather links from specific .db file
-    getFile(id + ".db", "json")
-        .then((response) => {
-            const userdb = response.links;
-            for (let i = 0; i < userdb.length; i++) {
-                links.push(userdb[i]);
-            }
-             readLinks();
+function setupEvents() {
+    editBtns = document.querySelectorAll(".editURL > button");
+    delBtns = document.querySelectorAll(".delURL > button");
+
+    for (let i = 0; i < delBtns.length; i++) {
+        delBtns[i].addEventListener("click", (ev) =>{
+            delClick(i);
+            ev.stopPropagation();
         })
+    }
 
-        .catch((error) => {
-            console.log("Resolve Error: %s", error);
-        });
-
+    for (let i = 0; i < editBtns.length; i++) {
+        editBtns[i].addEventListener("click", (ev) =>{
+            editClick(i);
+            ev.stopPropagation();
+        })
+    }
 }
 
 function addLink() { // functionality of add link button
@@ -70,7 +55,7 @@ function addLink() { // functionality of add link button
 function readLinks() {
     // clear bookmarks from view
     let list = document.querySelector(".links-container");
-    while (list.firstChild) {list.removeChild(list.firstChild);}
+    clear(list);
 
     // display each bookmark in 'links' array
     for (let i = 0; i < links.length; i++) {
@@ -82,19 +67,18 @@ function readLinks() {
 
 function adjustNav() {
     let navbar = document.querySelector(".navbar");
-    while (navbar.firstChild) {navbar.removeChild(navbar.firstChild);}
-    if (smallScreen.matches == false) {
+    clear(navbar);
+    if (view == "list") {
+        let nbExpand = document.createElement("span");
+        nbExpand.appendChild(document.createTextNode("≡"));
+        navbar.appendChild(document.createElement("div").appendChild(nbExpand));
+    } else if (view == "desktop") {
         let login = document.createElement("span");
         login.appendChild(document.createTextNode("Login"));
         let register = document.createElement("span");
         register.appendChild(document.createTextNode("Register"));
         navbar.appendChild(document.createElement("div").appendChild(login));
         navbar.appendChild(document.createElement("div").appendChild(register));
-        
-    } else {
-        let nbExpand = document.createElement("span");
-        nbExpand.appendChild(document.createTextNode("≡"));
-        navbar.appendChild(document.createElement("div").appendChild(nbExpand));
     }
 }
 
@@ -111,4 +95,13 @@ function delClick(boxNum) {
     links.splice(boxNum, 1);
     readLinks();
     setupEvents();
+}
+
+function adjustScreen() {
+    if (viewBreakpoint.matches) {
+        view = "list";
+    } else {
+        view = "desktop";
+    }
+    adjustNav();
 }
