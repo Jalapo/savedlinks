@@ -35,9 +35,6 @@ html body {
   gap: 2rem;
   font-size: 1.5rem;
   font-weight: 650;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -59,8 +56,21 @@ html body {
   }
 }
 
+.navbar > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+}
+
 .navbar span {
   cursor: pointer;
+  margin-left: auto;
+}
+
+.navbar .logo {
+  margin-left: 2rem;
 }
 
 .links-container {
