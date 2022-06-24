@@ -68,6 +68,10 @@ function readLinks() {
 function adjustNav() {
     let navbar = document.querySelector(".navbar");
     clear(navbar);
+    logo = navbar.appendChild(document.createElement("a"));
+    logo.classList.add("logo");
+    logo.appendChild(document.createTextNode("Safe Links"));
+    // navbar.appendChild(document.createElement("a").innerHTML("Safe Links"));
     if (view == "list") {
         let nbExpand = document.createElement("span");
         nbExpand.appendChild(document.createTextNode("≡"));
@@ -77,8 +81,10 @@ function adjustNav() {
         login.appendChild(document.createTextNode("Login"));
         let register = document.createElement("span");
         register.appendChild(document.createTextNode("Register"));
-        navbar.appendChild(document.createElement("div").appendChild(login));
-        navbar.appendChild(document.createElement("div").appendChild(register));
+        let container = document.createElement("div");
+        container.appendChild(document.createElement("div").appendChild(login));
+        container.appendChild(document.createElement("div").appendChild(register));
+        navbar.appendChild(container);
     }
 }
 
