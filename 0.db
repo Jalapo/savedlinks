@@ -1,4 +1,4 @@
 {"links" : [
-    {"name": "Google", "url": "google.com"},
-    {"name": "Reddit", "url": "reddit.com"}
+    {"title": "Google", "url": "google.com"},
+    {"title": "Reddit", "url": "reddit.com"}
 ]}
