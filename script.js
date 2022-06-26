@@ -9,20 +9,23 @@ window.onload = () => { // setup
     setTimeout(setupEvents, 100);
 }
 
-function initSetup() {
-    urlBar = document.querySelector(".bottomBar > input");
-    addBtn = document.querySelector(".bottomBar > button");
+function initSetup() { // initial setup of HTML element events
+    urlBar = document.querySelector(".bottomBar input[type=url]");
+    addBtn = document.querySelector(".bottomBar button");
 
     addBtn.addEventListener("click", addLink);
     urlBar.addEventListener("keypress", (ev) => {
         if (ev.key === "Enter") addLink();
-    })
+    });
+
+    urlBar.addEventListener("focus", expandBar);
+    urlBar.addEventListener("focusout", collapseBar);
 
     viewBreakpoint.addEventListener("change", adjustScreen);
     adjustScreen();
 }
 
-function setupEvents() {
+function setupEvents() { // setup events for dynamic HTML elements
     editBtns = document.querySelectorAll(".editURL > button");
     delBtns = document.querySelectorAll(".delURL > button");
 
@@ -42,14 +45,18 @@ function setupEvents() {
 }
 
 function addLink() { // functionality of add link button
-    urlBar = document.querySelector(".bottomBar > input");
+    urlBar = document.querySelector(".bottomBar input[type=url]");
+    titleBar = document.querySelector(".bottomBar input[type=text]");
+    let title = (titleBar.value) ? titleBar.value : urlBar.value;
     if (urlBar.value) {
-        links.push({url : urlBar.value});
+        links.push({title: title, url : urlBar.value});
         console.log(links[-1]);
         console.log(urlBar.value);
         readLinks();
         setupEvents();
     }
+    urlBar.value = titleBar.value = "";
+    document.activeElement.blur();
 }
 
 function readLinks() {
@@ -93,21 +100,49 @@ function openLink() {
 
 }
 
-function editClick(boxNum) {
+function editClick(boxNum) { // change properties of bookmark (on click)
     alert("clicked edit");
 }
 
-function delClick(boxNum) {
+function delClick(boxNum) { // deletes box (on click)
     links.splice(boxNum, 1);
     readLinks();
     setupEvents();
 }
 
-function adjustScreen() {
+function adjustScreen() { // changes view of app depending on screen size
     if (viewBreakpoint.matches) {
         view = "list";
     } else {
         view = "desktop";
     }
     adjustNav();
+}
+
+function expandBar() { // "expands" bottom URL bar to show URL title input box
+    console.log(document.querySelector(".bottomBar").children[0].tagName);
+    if (document.querySelector(".bottomBar").children[0].tagName == "DIV") {
+        titleInput = document.createElement("input");
+        titleInput.type = "text";
+        titleInput.placeholder = "Google";
+        titleInput.maxLength = 24;
+        titleInput.addEventListener("focusout", collapseBar);
+        titleInput.addEventListener("keypress", (ev) => {
+            if (ev.key === "Enter") addLink();
+        });
+
+        bb = document.querySelector(".bottomBar");
+        bb.insertBefore(titleInput, bb.children[0]);
+    }
+}
+
+function collapseBar() { // "collapses" bottom URL bar and hides URL title input box
+    urlBar = document.querySelector(".bottomBar input[type=url]");
+    titleBar = document.querySelector(".bottomBar input[type=text]");
+    setTimeout(() => {
+        if (urlBar.value == "" && titleBar.value == "" && document.activeElement != titleBar && document.activeElement != urlBar) {
+            bb = document.querySelector(".bottomBar");
+            bb.removeChild(bb.children[0]);
+        }
+    }, 10);
 }
