@@ -143,6 +143,9 @@ html body {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
   }
 }
 
@@ -154,15 +157,6 @@ html body {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .box * {
-    margin: 0;
-    -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center;
   }
 }
 
@@ -187,28 +181,37 @@ html body {
   text-align: start;
   padding-left: 1rem;
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  padding-bottom: 0.5rem;
+  max-height: 100%;
   width: 100%;
   font-size: 1.4rem;
   font-weight: 700;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 800px) and (min-height: 570px) {
   .box .urlTextBox {
     text-align: center;
     padding-left: 0rem;
-    height: 30%;
-    margin-top: 4rem;
+    padding-top: 1rem;
+    text-overflow: ellipsis;
+    margin-top: 2rem;
+  }
+  .box .urlTextBox > div {
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+    margin-top: 0.6rem;
+    text-overflow: ellipsis;
+    max-height: 1.5rem;
+    overflow: hidden;
   }
 }
 
-.box .urlTextBox span {
+.box .urlTextBox .subtext {
   font-size: 0.8em;
   font-weight: 1;
 }
@@ -233,6 +236,13 @@ html body {
   }
 }
 
+.box .boxButtons > * {
+  margin: 0;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
 .box .boxButtons .editURL button {
   color: orange;
 }
@@ -242,25 +252,31 @@ html body {
 }
 
 .bottomBar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-column-gap: 1.5rem;
           column-gap: 1.5rem;
   row-gap: 0.5rem;
-  padding: 0.5em;
+  padding: 0.5rem 0.5rem 0.5rem;
   margin-top: 0.2rem;
   /* trying to fix awkward scrollbar length */
   background-color: #132139;
   border-radius: 0.7rem 0.7rem 0rem 0rem;
 }
 
-.bottomBar input[type=url] {
+.bottomBar .flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  row-gap: 0.5rem;
+  -webkit-column-gap: 1.5rem;
+          column-gap: 1.5rem;
+}
+
+.bottomBar input[type=url], .bottomBar input[type=text] {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
@@ -272,9 +288,14 @@ html body {
   text-indent: 1.5rem;
 }
 
-.bottomBar input[type=url]:focus {
+.bottomBar input[type=url]:focus, .bottomBar input:focus[type=text] {
   border-color: #759ef0;
   outline: none;
+}
+
+.bottomBar input[type=text] {
+  margin-bottom: 0.5rem;
+  width: 35%;
 }
 
 .bottomBar button {
