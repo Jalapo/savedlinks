@@ -3,7 +3,7 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
 
     let urlTextDiv = document.createElement("div");
     let urlTitle = document.createElement("div");
-    let urlText = document.createElement("span")
+    let urlText = document.createElement("div")
 
     let buttonsDiv = document.createElement("div");
     let editDiv = document.createElement("div");
@@ -16,13 +16,13 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
 
     urlTextDiv.classList.add("urlTextBox");
     urlTitle.classList.add("urlTitle");
-    urlText.classList.add("click");
+    urlText.classList.add("click","subtext");
     buttonsDiv.classList.add("boxButtons");
     editDiv.classList.add("editURL");
     delDiv.classList.add("delURL");
 
-    urlTitle.appendChild(document.createTextNode(link.name));
-    urlText.appendChild(document.createTextNode(link.url));
+    urlTitle.appendChild(document.createTextNode(link.title));
+    if (link.title != link.url) urlText.appendChild(document.createTextNode(link.url));
     urlTextDiv.appendChild(urlTitle);
     urlTextDiv.appendChild(urlText);
 
