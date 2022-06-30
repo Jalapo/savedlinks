@@ -50,14 +50,13 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
                 */
 }
 
-function getLinks(id = 0) {     // gather links from specific .db file
+function getLinksFromDB(id = 0) {     // gather links from specific .db file
     getFile(id + ".db", "json")
         .then((response) => {
             const userdb = response.links;
             for (let i = 0; i < userdb.length; i++) {
                 links.push(userdb[i]);
             }
-             readLinks();
         })
 
         .catch((error) => {
