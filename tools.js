@@ -1,4 +1,5 @@
 function createBookmarkBox(link) { // creates DOM for bookmark boxes
+    // create and define elements
     let box = document.createElement("div");
 
     let urlTextDiv = document.createElement("div");
@@ -9,11 +10,13 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
     let editDiv = document.createElement("div");
     let delDiv = document.createElement("div");
 
+    // box click event
     box.classList.add("box","click");
     box.addEventListener("click", () => {
         window.open('http://' + link.url);
     });
 
+    // apply classes
     urlTextDiv.classList.add("urlTextBox");
     urlTitle.classList.add("urlTitle");
     urlText.classList.add("click","subtext");
@@ -21,15 +24,17 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
     editDiv.classList.add("editURL");
     delDiv.classList.add("delURL");
 
-    urlTitle.appendChild(document.createTextNode(link.title));
-    if (link.title == link.url) {
-        urlText.appendChild(document.createTextNode("h"));
+    // Are the title and URL the same? (shared values when title is not given by User)
+    if (link.title == link.url) { 
+        urlText.appendChild(document.createTextNode("h")); // if so, create invisible text element for CSS responsive size
         urlText.style.color = "transparent";
-        urlTitle.style.marginBottom = "-0.2rem";
-    } else {
+        urlTitle.style.marginBottom = "-0.2rem"; 
+    } else {                                               // otherwise, input the URl normally
         urlText.appendChild(document.createTextNode(link.url));
     }
-    
+
+    // construct DOM
+    urlTitle.appendChild(document.createTextNode(link.title));
     urlTextDiv.appendChild(urlTitle);
     urlTextDiv.appendChild(urlText);
 
@@ -44,8 +49,7 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
     box.appendChild(urlTextDiv);
     
 
-    return box; /* 
-    box {
+    return box; /* {
         urlTextDiv {
             urlTitle {link.name}
             urlText {link.url}
@@ -54,7 +58,7 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
             editDiv {class: "editURL"}
             delDiv {class: "delURL"}
         }
-    }   
+    }
                 */
 }
 
@@ -80,7 +84,6 @@ function getFile(filename, type="text") { // fetches file
         xmlhttp.onload = () => {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 resolve(xmlhttp.response);
-                //console.log(xmlhttp.response.links[0]);
             } else {
                 reject(xmlhttp.status);
             }
