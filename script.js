@@ -1,8 +1,20 @@
 let links = [];
-const viewBreakpoint = window.matchMedia("(max-width: 800px), (max-height: 570px)");
+// Break off point for tablets
+// const viewBreakpoint = window.matchMedia("(max-width: 800px), (max-height: 570px)");
+
+// Break off points for new view with 2 elements
+const viewBreakpoint = window.matchMedia("(max-width: 890px), (max-height: 570px)");
 // const thinTab = window.matchMedia("(max-height: 570px)");
 let view = "list";
 let id;
+let navbar;
+let list;
+let editBtns;
+let delBtns;
+let bb;
+let urlBar;
+let titleBar;
+let addBtn;
 
 window.onload = () => { // setup
     // localStorage.clear()
@@ -12,22 +24,29 @@ window.onload = () => { // setup
     setTimeout(setupEvents, 100);
 }
 
-function getLinks() {
-    if (localStorage.getItem(`myID`)) {
+function getLinks() { // get links from localStorage if available, otherwise obtain from DB file
+    if (localStorage.getItem(`myID`)) { /* 
+            check if myID is available (done), then after check if myID has a default value
+            if false (user's first visit) --> give myID a default value
+            if true (user visited before but has not registered) --> nothing
+            after: feed unregistered "Google-style" page with bottom button to reveal "Sign up" and "Login" for mobile
+                                                         with default header for "Signup" and "Login" buttons for desktop
+                                        */ 
         id = localStorage.getItem(`myID`);
         links = JSON.parse(localStorage.getItem(`myLinks#${id}`));
         console.log(localStorage.getItem(`myID`));
         // console.log(links);
-    } else {
+    } else { // this needs to provide a different page layout (React?) so the user can 
         id = 0;
         getLinksFromDB(id);
         setTimeout(saveToLocal, 1000);
     }
 }
 
+
+
 function initSetup() { // initial setup of HTML element events
-    urlBar = document.querySelector(".bottomBar input[type=url]");
-    addBtn = document.querySelector(".bottomBar button");
+    queryItems();
 
     addBtn.addEventListener("click", addLink);
     urlBar.addEventListener("keypress", (ev) => {
@@ -42,8 +61,7 @@ function initSetup() { // initial setup of HTML element events
 }
 
 function setupEvents() { // setup events for dynamic HTML elements
-    editBtns = document.querySelectorAll(".editURL > button");
-    delBtns = document.querySelectorAll(".delURL > button");
+    queryItems();
 
     for (let i = 0; i < delBtns.length; i++) {
         delBtns[i].addEventListener("click", (ev) =>{
@@ -61,8 +79,8 @@ function setupEvents() { // setup events for dynamic HTML elements
 }
 
 function addLink() { // functionality of add link button
-    urlBar = document.querySelector(".bottomBar input[type=url]");
-    titleBar = document.querySelector(".bottomBar input[type=text]");
+    queryItems();
+
     let title = (titleBar.value) ? titleBar.value : urlBar.value;
     if (urlBar.value) {
         links.push({title: title, url : urlBar.value});
@@ -76,7 +94,7 @@ function addLink() { // functionality of add link button
 
 function readLinks() {
     // clear bookmarks from view
-    let list = document.querySelector(".links-container");
+    queryItems();
     clear(list);
 
     // display each bookmark in 'links' array
@@ -86,58 +104,61 @@ function readLinks() {
     }
 }
 
-
-function adjustNav() {
-    let navbar = document.querySelector(".navbar");
-    clear(navbar);
-    logo = navbar.appendChild(document.createElement("a"));
-    logo.classList.add("logo");
-    logo.appendChild(document.createTextNode("Safe Links"));
-    if (view == "list") {
-        let nbExpand = document.createElement("span");
-        nbExpand.appendChild(document.createTextNode("≡"));
-        navbar.appendChild(document.createElement("div").appendChild(nbExpand));
-    } else if (view == "desktop") {
-        let login = document.createElement("span");
-        login.appendChild(document.createTextNode("Login"));
-        let register = document.createElement("span");
-        register.appendChild(document.createTextNode("Register"));
-        let container = document.createElement("div");
-        container.appendChild(document.createElement("div").appendChild(login));
-        container.appendChild(document.createElement("div").appendChild(register));
-        navbar.appendChild(container);
-    }
-}
-
-
 function openLink() {
 
 }
+
+
 
 function editClick(boxNum) { // change properties of bookmark (on click)
     alert("clicked edit");
 }
 
 function delClick(boxNum) { // deletes box (on click)
-    links.splice(boxNum, 1);
-    readLinks();
-    setupEvents();
-    saveToLocal();
+    links.splice(boxNum, 1); // remove from array
+    readLinks(); // update screen
+    setupEvents(); // reconfigure events
+    saveToLocal(); // save changes
 }
 
 function adjustScreen() { // changes view of app depending on screen size
-    if (viewBreakpoint.matches) {
-        view = "list";
+    queryItems();
+    //clear navbar and add default elements (logo)
+    clear(navbar);
+    logo = navbar.appendChild(document.createElement("a"));
+    logo.classList.add("logo");
+    logo.appendChild(document.createTextNode("Safe Links"));
+
+
+    if (viewBreakpoint.matches) { // is this a mobile device?
+        // if so, create a header expand button
+        let nbExpand = document.createElement("span");
+        nbExpand.appendChild(document.createTextNode("≡"));
+        // assign event
+
+        // add to navbar
+        navbar.appendChild(document.createElement("div").appendChild(nbExpand));
     } else {
-        view = "desktop";
+        // create login and register buttons
+        let login = document.createElement("span");
+        login.appendChild(document.createTextNode("Login"));
+        let register = document.createElement("span");
+        register.appendChild(document.createTextNode("Register"));
+        // assign events to buttons
+
+        // create container to hold them together
+        let container = document.createElement("div");
+        container.appendChild(document.createElement("div").appendChild(login));
+        container.appendChild(document.createElement("div").appendChild(register));
+        // add to navbar
+        navbar.appendChild(container);
     }
-    adjustNav();
 }
 
 function expandBar() { // "expands" bottom URL bar to show URL title input box
-    console.log(document.querySelector(".bottomBar").children[0].tagName);
-    if (document.querySelector(".bottomBar").children[0].tagName == "DIV") {
-        titleInput = document.createElement("input");
+    queryItems();
+    if (bb.children[0].tagName != "INPUT") { // if the title input box is not already present
+        titleInput = document.createElement("input"); // create title input 
         titleInput.type = "text";
         titleInput.placeholder = "Google";
         titleInput.maxLength = 24;
@@ -146,24 +167,35 @@ function expandBar() { // "expands" bottom URL bar to show URL title input box
             if (ev.key === "Enter") addLink();
         });
 
-        bb = document.querySelector(".bottomBar");
-        bb.insertBefore(titleInput, bb.children[0]);
+        
+        bb.insertBefore(titleInput, bb.children[0]); // place input above the other bottom bar elements
     }
 }
 
 function collapseBar() { // "collapses" bottom URL bar and hides URL title input box
-    urlBar = document.querySelector(".bottomBar input[type=url]");
-    titleBar = document.querySelector(".bottomBar input[type=text]");
+    queryItems();
     setTimeout(() => {
-        if (urlBar.value == "" && titleBar.value == "" && document.activeElement != titleBar && document.activeElement != urlBar) {
-            bb = document.querySelector(".bottomBar");
-            bb.removeChild(bb.children[0]);
+        if (urlBar.value == "" && titleBar.value == "") { // text inputs are empty
+            if (document.activeElement != titleBar && document.activeElement != urlBar) { // text inputs are unselected
+                bb = document.querySelector(".bottomBar");
+                bb.removeChild(bb.children[0]);
+            }
         }
     }, 10);
 }
 
-function saveToLocal() {
+function saveToLocal() { // saves current bookmarks to localStorage
     localStorage.setItem(`myID`, id);
     localStorage.setItem(`myLinks#${id}`, JSON.stringify(links));
-    console.log(localStorage[`myLinks#${id}`]);
+}
+
+function queryItems() {
+    navbar = document.querySelector(".navbar");
+    list = document.querySelector(".links-container");
+    editBtns = list.querySelectorAll(".editURL > button");
+    delBtns = list.querySelectorAll(".delURL > button");
+    bb = document.querySelector(".bottomBar");
+    urlBar = bb.querySelector("input[type=url]");
+    titleBar = bb.querySelector("input[type=text]");
+    addBtn = bb.querySelector("button");
 }
