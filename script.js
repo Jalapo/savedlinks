@@ -122,6 +122,7 @@ function delClick(boxNum) { // deletes box (on click)
     links.splice(boxNum, 1);
     readLinks();
     setupEvents();
+    saveToLocal();
 }
 
 function adjustScreen() { // changes view of app depending on screen size
