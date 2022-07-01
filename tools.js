@@ -22,7 +22,14 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
     delDiv.classList.add("delURL");
 
     urlTitle.appendChild(document.createTextNode(link.title));
-    if (link.title != link.url) urlText.appendChild(document.createTextNode(link.url));
+    if (link.title == link.url) {
+        urlText.appendChild(document.createTextNode("h"));
+        urlText.style.color = "transparent";
+        urlTitle.style.marginBottom = "-0.2rem";
+    } else {
+        urlText.appendChild(document.createTextNode(link.url));
+    }
+    
     urlTextDiv.appendChild(urlTitle);
     urlTextDiv.appendChild(urlText);
 
@@ -33,8 +40,9 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
 
     buttonsDiv.appendChild(editDiv);
     buttonsDiv.appendChild(delDiv);
-    box.appendChild(urlTextDiv);
     box.appendChild(buttonsDiv);
+    box.appendChild(urlTextDiv);
+    
 
     return box; /* 
     box {

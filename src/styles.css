@@ -1,314 +1,231 @@
 html, html body {
   height: 100%;
-  font-family: system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.2rem;
   margin: 0px;
   padding: 0px;
 }
-
 @media screen and (min-width: 800px) {
   html, html body {
     font-size: 1.5rem;
   }
 }
-
 html body {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background-color: #0d1626;
+  flex-direction: column;
+  background-color: hsl(218deg, 50%, 10%);
 }
 
 .navbar {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   height: 2.5rem;
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 1;
-          flex: 0 0 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  flex: 0 0 1;
   display: flex;
   gap: 2rem;
   font-size: 1.5rem;
   font-weight: 650;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding: 0.4rem 2rem 0.4rem 0rem;
-  background-color: #0d1626;
+  background-color: hsl(218deg, 50%, 10%);
   /* background-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 30%, hsl(218, 70%, 10%) 100%); */
-  color: #bacfa5;
+  color: hsl(90deg, 30%, 73%);
 }
-
 @media screen and (min-width: 800px) {
   .navbar {
     font-size: 1rem;
   }
 }
-
 @media screen and (max-height: 570px) {
   .navbar {
     font-size: 1.5rem;
   }
 }
-
 .navbar > div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   gap: 1rem;
   margin-left: auto;
 }
-
 .navbar span {
   cursor: pointer;
   margin-left: auto;
 }
-
 .navbar .logo {
   margin-left: 2rem;
 }
 
 .links-container {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  flex-grow: 1;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   gap: 4vh;
   padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-color: #1a1a1a black;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  scrollbar-color: hsl(0deg, 0%, 10%) hsl(0deg, 0%, 0%);
+  justify-content: flex-start;
   justify-items: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 @media screen and (min-width: 800px) {
   .links-container {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 2rem;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
+    justify-content: space-evenly;
   }
 }
 
 .box {
-  border: 0.25rem solid #030616;
+  border: 0.25rem solid hsl(230deg, 75%, 5%);
   border-radius: 1.5rem;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#0d12a5), color-stop(20%, #0b108e), to(#010109));
-  background-image: linear-gradient(to bottom, #0d12a5 0%, #0b108e 20%, #010109 100%);
+  background-image: linear-gradient(to bottom, hsl(238deg, 85%, 35%) 0%, hsl(238deg, 85%, 30%) 20%, hsl(238deg, 85%, 2%) 100%);
   color: lightblue;
   width: 100%;
   height: clamp(4rem, 25vh, 15%);
   padding: 2rem auto;
   font-size: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row-reverse;
 }
-
 @media screen and (min-width: 800px) {
   .box {
-    width: 14rem;
-    height: 14rem;
-    padding: auto;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center;
+    width: clamp(16rem, 30%, 20rem);
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 0;
+    flex-direction: column-reverse;
+    align-self: center;
   }
 }
-
 @media screen and (max-height: 570px) {
   .box {
     width: 100%;
     height: clamp(3.2rem, 25vh, 80%);
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    flex-direction: row-reverse;
   }
 }
-
 .box button {
   width: 2.5rem;
   height: 2.5rem;
   padding: 0;
   font-size: 1.7rem;
   font-weight: 600;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#04052f), to(#020213));
-  background-image: linear-gradient(to bottom, #04052f 0%, #020213 100%);
+  background-image: linear-gradient(to bottom, hsl(238deg, 85%, 10%) 0%, hsl(238deg, 85%, 4%) 100%);
   border: none;
   border-radius: 3rem;
   cursor: default;
 }
-
+.box button:hover {
+  background-image: linear-gradient(to bottom, hsl(238deg, 85%, 25%) 0%, hsl(238deg, 85%, 19%) 100%);
+}
 .box .urlTextBox {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 initial;
-          flex: 1 1 initial;
+  flex: 1 1 initial;
   display: inline-block;
   text-align: start;
   padding-left: 1rem;
   margin-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   max-height: 100%;
   width: 100%;
   font-size: 1.4rem;
   font-weight: 700;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  align-self: center;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
 @media screen and (min-width: 800px) and (min-height: 570px) {
   .box .urlTextBox {
     text-align: center;
     padding-left: 0rem;
     padding-top: 1rem;
     text-overflow: ellipsis;
-    margin-top: 2rem;
   }
   .box .urlTextBox > div {
     padding-right: 0.2rem;
     padding-left: 0.2rem;
-    margin-top: 0.6rem;
     text-overflow: ellipsis;
-    max-height: 1.5rem;
     overflow: hidden;
   }
 }
-
 .box .urlTextBox .subtext {
   font-size: 0.8em;
   font-weight: 1;
 }
-
 .box .boxButtons {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  flex: 1 1 content;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   text-align: center;
   gap: 1.5rem;
   padding-right: 1rem;
 }
-
 @media screen and (min-width: 800px) and (min-height: 570px) {
   .box .boxButtons {
+    flex: 0;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
     padding-right: 0rem;
   }
 }
-
 .box .boxButtons > * {
   margin: 0;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  align-self: center;
 }
-
 .box .boxButtons .editURL button {
   color: orange;
 }
-
 .box .boxButtons .delURL button {
   color: red;
 }
 
 .bottomBar {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-column-gap: 1.5rem;
-          column-gap: 1.5rem;
+  justify-content: center;
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
   row-gap: 0.5rem;
   padding: 0.5rem 0.5rem 0.5rem;
   margin-top: 0.2rem;
   /* trying to fix awkward scrollbar length */
-  background-color: #132139;
+  background-color: hsl(218deg, 50%, 15%);
   border-radius: 0.7rem 0.7rem 0rem 0rem;
 }
-
 .bottomBar .flex-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   row-gap: 0.5rem;
-  -webkit-column-gap: 1.5rem;
-          column-gap: 1.5rem;
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
 }
-
 .bottomBar input[type=url], .bottomBar input[type=text] {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+  flex: 1 1 auto;
   height: 3em;
   border-radius: 4em;
   border: 0.1rem solid transparent;
-  background-color: #395360;
+  background-color: hsl(200deg, 25%, 30%);
   size: 2rem;
   text-indent: 1.5rem;
 }
-
-.bottomBar input[type=url]:focus, .bottomBar input:focus[type=text] {
-  border-color: #759ef0;
+.bottomBar input[type=url]:focus, .bottomBar input[type=text]:focus {
+  border-color: hsl(220deg, 80%, 70%);
   outline: none;
 }
-
 .bottomBar input[type=text] {
   margin-bottom: 0.5rem;
   width: 35%;
 }
-
 .bottomBar button {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 initial;
-          flex: 1 1 initial;
+  flex: 1 1 initial;
   font-size: 20px;
   padding: 0;
   width: 2.5em;
   height: 2.5em;
   border-radius: 4em;
   border-color: transparent;
-  background-color: #e4c83f;
+  background-color: hsl(50deg, 75%, 57%);
   cursor: pointer;
 }
 
@@ -320,16 +237,14 @@ html body {
 
 /* Scroll track */
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 5px black;
-          box-shadow: inset 0 0 5px black;
+  box-shadow: inset 0 0 5px hsl(0deg, 0%, 0%);
   border-radius: 16px;
 }
 
 /* Click Handle */
 ::-webkit-scrollbar-thumb {
-  background: #060e18;
+  background: hsl(215deg, 58%, 6%);
   border-radius: 16px;
 }
 
-/*--------------------------------*/
-/*# sourceMappingURL=styles.css.map */
+/*--------------------------------*//*# sourceMappingURL=styles.css.map */
