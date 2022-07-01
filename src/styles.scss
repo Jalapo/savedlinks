@@ -38,7 +38,6 @@ html {
     align-items: center;
     padding: 0.4rem 2rem 0.4rem 0rem;
     background-color: hsl(218, 50%, 10%);
-    /* background-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 30%, hsl(218, 70%, 10%) 100%); */
     color: hsl(90, 30%, 73%);
     @media screen and (min-width: $desktop) {
         font-size: 1rem;
@@ -89,10 +88,10 @@ html {
 
 
 .box {
-
+    $color: hsl(240, 95%, 50%);
     border: 0.25rem solid hsl(230, 75%, 5%);
     border-radius: 1.5rem;
-    background-image: linear-gradient(to bottom, hsl(238, 85%, 35%) 0%, hsl(238, 85%, 30%) 20%, hsl(238, 85%, 2%) 100%);
+    background-image: linear-gradient(to bottom, $color 0%, 35%, darken($color, 35%) 100%);
     color: lightblue;
     width: 100%;
     height: clamp(4rem, 25vh, 15%);
@@ -102,7 +101,6 @@ html {
     flex-direction: row-reverse;
     
     @media screen and (min-width: $desktop) {
-        // width: 14rem;
         width: clamp(16rem, 30%, 20rem);
         height: fit-content;
         padding: 0;
@@ -121,12 +119,12 @@ html {
         padding: 0;
         font-size: 1.7rem;
         font-weight: 600;
-        background-image: linear-gradient(to bottom, hsl(238, 85%, 10%) 0%, hsl(238, 85%, 4%) 100%);
+        background-image: radial-gradient(circle, hsl(250, 95%, 0%) 60%, hsl(250, 0%, 100%) 100%);
         border: none;
         border-radius: 3rem;
         cursor: default;
         &:hover {
-            background-image: linear-gradient(to bottom, hsl(238, 85%, 25%) 0%, hsl(238, 85%, 19%) 100%);
+            background-image: radial-gradient(circle, hsl(250, 95%, 15%) 60%, hsl(250, 85%, 100%) 100%);
         }
     }
 
@@ -154,7 +152,6 @@ html {
             >div {
                 padding-right: 0.2rem;
                 padding-left: 0.2rem;
-                // margin-top: 0.6rem;
                 text-overflow: ellipsis;
                 // max-height: 2rem;
                 overflow: hidden;
@@ -178,16 +175,14 @@ html {
         @media screen and (min-width: $desktop) and (min-height: $tab) {
             flex: 0;
             margin-top: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.2rem;
             padding-right: 0rem;
         }
 
         >* {
-        // @media screen and (max-width: $desktop) { // for mobile devices
            margin: 0;
            align-self: center;
-        // }
-   }
+        }
         
         .editURL {
             button {

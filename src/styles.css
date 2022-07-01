@@ -27,7 +27,6 @@ html body {
   align-items: center;
   padding: 0.4rem 2rem 0.4rem 0rem;
   background-color: hsl(218deg, 50%, 10%);
-  /* background-image: linear-gradient(to bottom, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 30%, hsl(218, 70%, 10%) 100%); */
   color: hsl(90deg, 30%, 73%);
 }
 @media screen and (min-width: 800px) {
@@ -79,7 +78,7 @@ html body {
 .box {
   border: 0.25rem solid hsl(230deg, 75%, 5%);
   border-radius: 1.5rem;
-  background-image: linear-gradient(to bottom, hsl(238deg, 85%, 35%) 0%, hsl(238deg, 85%, 30%) 20%, hsl(238deg, 85%, 2%) 100%);
+  background-image: linear-gradient(to bottom, hsl(240deg, 95%, 50%) 0%, 35%, #02024b 100%);
   color: lightblue;
   width: 100%;
   height: clamp(4rem, 25vh, 15%);
@@ -112,13 +111,13 @@ html body {
   padding: 0;
   font-size: 1.7rem;
   font-weight: 600;
-  background-image: linear-gradient(to bottom, hsl(238deg, 85%, 10%) 0%, hsl(238deg, 85%, 4%) 100%);
+  background-image: radial-gradient(circle, hsl(250deg, 95%, 0%) 60%, hsl(250deg, 0%, 100%) 100%);
   border: none;
   border-radius: 3rem;
   cursor: default;
 }
 .box button:hover {
-  background-image: linear-gradient(to bottom, hsl(238deg, 85%, 25%) 0%, hsl(238deg, 85%, 19%) 100%);
+  background-image: radial-gradient(circle, hsl(250deg, 95%, 15%) 60%, hsl(250deg, 85%, 100%) 100%);
 }
 .box .urlTextBox {
   flex: 1 1 initial;
@@ -167,7 +166,7 @@ html body {
   .box .boxButtons {
     flex: 0;
     margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.2rem;
     padding-right: 0rem;
   }
 }
