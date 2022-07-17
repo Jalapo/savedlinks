@@ -29,16 +29,6 @@ html body {
   background-color: hsl(218deg, 50%, 10%);
   color: hsl(90deg, 30%, 73%);
 }
-@media screen and (min-width: 800px) {
-  .navbar {
-    font-size: 1rem;
-  }
-}
-@media screen and (max-height: 570px) {
-  .navbar {
-    font-size: 1.5rem;
-  }
-}
 .navbar > div {
   display: flex;
   gap: 1rem;
@@ -187,8 +177,7 @@ html body {
        column-gap: 1.5rem;
   row-gap: 0.5rem;
   padding: 0.5rem 0.5rem 0.5rem;
-  margin-top: 0.2rem;
-  /* trying to fix awkward scrollbar length */
+  margin-top: 0.2rem; /* trying to fix awkward scrollbar length */
   background-color: hsl(218deg, 50%, 15%);
   border-radius: 0.7rem 0.7rem 0rem 0rem;
 }
