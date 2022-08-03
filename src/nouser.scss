@@ -1,0 +1,175 @@
+$desktop: 800px;
+$tab: 570px;
+@mixin hidden {
+    margin: 0rem;
+    padding: 0rem;
+    height: 0rem;
+    width: 0rem;
+    font-size: 0rem;
+}
+
+html {
+    height: 100%;
+    font-family: system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.2rem;
+    margin: 0px;
+    padding: 0px;
+    @media screen and (min-width: $desktop) {
+        font-size: 1.5rem;
+    }
+
+    body {
+        @extend html;
+        display: flex;
+        flex-direction: column;
+        background-color: hsl(218, 50%, 10%);
+    }
+
+}
+
+.navbar {
+    font-family: 'Times New Roman', Times, serif;
+    height: 2.5rem;
+    flex: 0 0 1;
+    display: flex;
+    gap: 2rem;
+    // font-size: 1.1rem;
+    font-size: min(6.5vw, 1.1rem);
+    font-weight: 650;
+    align-items: center;
+    padding: 0vw 1vw 0vw 0vw;
+    background-color: hsl(218, 50%, 10%);
+    color: hsl(90, 30%, 73%);
+    justify-content: center;
+
+    >div {
+        display: flex;
+        gap: 1rem;
+        margin-left: auto;
+    }
+
+    span {
+        cursor: pointer;
+        margin-left: auto;
+    }
+
+    
+}
+
+.logo {
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(6vh, 3rem, 20vw);
+    color: hsl(90, 30%, 73%);
+    font-weight: 650;
+    // display: flex;
+    justify-content: center;
+    span {
+        // position: absolute;
+        align-self: center;
+        justify-self: center;
+        // transform: translateY(-50%);
+    }
+}
+
+
+
+.bottomBar {
+    // border: 1px solid red;
+    // *{border: 1px solid green;}
+    // border: 1px solid blue;
+    display: flex;
+    // flex-direction: column;
+    // text-align: center;
+    justify-content: center;
+    width: 100vw;
+    column-gap: 1.5rem;
+    row-gap: 0.5rem;
+    // padding: 0.5rem 0.5rem 0.5rem;
+    // padding: 0vw 10vw 0vw 10vw;
+    margin-top: 0.2rem; /* trying to fix awkward scrollbar length */
+    // background-color: hsl(218, 50%, 15%);
+    border-radius: 0.7rem 0.7rem 0rem 0rem;
+
+    >.flex-container {
+        display: flex;
+        width: 100vw;
+        padding: 30vh 0vh 0vh;
+        flex-direction: row;
+        width: fit-content;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        @media screen and (max-width: $desktop) {
+            flex-direction: column;
+            button {align-self: center;}
+        }
+
+
+        >.flex-container {
+            display: flex;
+            flex: 1 1 0;
+            gap: 0.5rem;
+            // justify-self: center;
+            flex-direction: column;
+            // justify-content: center;
+            align-items: center;
+            // row-gap: 0.5rem;
+            column-gap: 1.5rem;
+        }
+    
+        input[type=url] {
+            height: 3em;
+            flex: 1 1 auto;
+            width: fit-content;
+            // max-width: max(40vw,3rem);
+            padding: 0vw min(20vw,8rem) 0vw min(20vw,8rem);
+            border-radius: 4em;
+            border: 0.1rem solid transparent;
+            background-color: hsl(200, 25%, 30%);
+            size: 2rem;
+            text-indent: 1.5rem;
+            &:focus {
+                border-color: hsl(220, 80%, 70%);
+                outline: none;
+            }
+            align-self: center;
+        }
+    
+        
+    }
+    button {
+        flex: 1 1 initial;
+        align-self: flex-end;
+        font-size: 20px;
+        padding: 0;
+        width: 4.4em;
+        height: 2.2em;
+        border-radius: 4em;
+        border-color: transparent;
+        // background-color: hsl(50, 75%, 57%);
+        background-color: hsl(200, 75%, 60%);
+        cursor: pointer;
+    }
+    
+}
+
+    /* scrollbar for modern webkit browsers */
+    ::-webkit-scrollbar {
+        width: auto;
+        margin-bottom: 2rem;
+    }
+
+        /* Scroll track */
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px hsl(0, 0%, 0%);
+        border-radius: 16px;
+    }
+    
+    /* Click Handle */
+    ::-webkit-scrollbar-thumb {
+        background: hsl(215, 58%, 6%);
+        border-radius: 16px;
+    }
+/*--------------------------------*/
+
+

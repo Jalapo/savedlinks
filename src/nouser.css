@@ -1,0 +1,143 @@
+html, html body {
+  height: 100%;
+  font-family: system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.2rem;
+  margin: 0px;
+  padding: 0px;
+}
+@media screen and (min-width: 800px) {
+  html, html body {
+    font-size: 1.5rem;
+  }
+}
+html body {
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(218deg, 50%, 10%);
+}
+
+.navbar {
+  font-family: "Times New Roman", Times, serif;
+  height: 2.5rem;
+  flex: 0 0 1;
+  display: flex;
+  gap: 2rem;
+  font-size: min(6.5vw, 1.1rem);
+  font-weight: 650;
+  align-items: center;
+  padding: 0vw 1vw 0vw 0vw;
+  background-color: hsl(218deg, 50%, 10%);
+  color: hsl(90deg, 30%, 73%);
+  justify-content: center;
+}
+.navbar > div {
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+}
+.navbar span {
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.logo {
+  position: relative;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(6vh, 3rem, 20vw);
+  color: hsl(90deg, 30%, 73%);
+  font-weight: 650;
+  justify-content: center;
+}
+.logo span {
+  align-self: center;
+  justify-self: center;
+}
+
+.bottomBar {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
+  row-gap: 0.5rem;
+  margin-top: 0.2rem; /* trying to fix awkward scrollbar length */
+  border-radius: 0.7rem 0.7rem 0rem 0rem;
+}
+.bottomBar > .flex-container {
+  display: flex;
+  width: 100vw;
+  padding: 30vh 0vh 0vh;
+  flex-direction: row;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+@media screen and (max-width: 800px) {
+  .bottomBar > .flex-container {
+    flex-direction: column;
+  }
+  .bottomBar > .flex-container button {
+    align-self: center;
+  }
+}
+.bottomBar > .flex-container > .flex-container {
+  display: flex;
+  flex: 1 1 0;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
+}
+.bottomBar > .flex-container input[type=url] {
+  height: 3em;
+  flex: 1 1 auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0vw min(20vw, 8rem) 0vw min(20vw, 8rem);
+  border-radius: 4em;
+  border: 0.1rem solid transparent;
+  background-color: hsl(200deg, 25%, 30%);
+  size: 2rem;
+  text-indent: 1.5rem;
+  align-self: center;
+}
+.bottomBar > .flex-container input[type=url]:focus {
+  border-color: hsl(220deg, 80%, 70%);
+  outline: none;
+}
+.bottomBar button {
+  flex: 1 1 initial;
+  align-self: flex-end;
+  font-size: 20px;
+  padding: 0;
+  width: 4.4em;
+  height: 2.2em;
+  border-radius: 4em;
+  border-color: transparent;
+  background-color: hsl(200deg, 75%, 60%);
+  cursor: pointer;
+}
+
+/* scrollbar for modern webkit browsers */
+::-webkit-scrollbar {
+  width: auto;
+  margin-bottom: 2rem;
+}
+
+/* Scroll track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px hsl(0deg, 0%, 0%);
+  border-radius: 16px;
+}
+
+/* Click Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(215deg, 58%, 6%);
+  border-radius: 16px;
+}
+
+/*--------------------------------*//*# sourceMappingURL=nouser.css.map */
