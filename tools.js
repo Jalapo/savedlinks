@@ -1,3 +1,55 @@
+        // FILES \\
+function getLinksFromDB(id = 0) {     // gather links from specific .db file
+    getFile(id + ".db", "json")
+        .then((response) => {
+            const userdb = response.links;
+            for (let i = 0; i < userdb.length; i++) {
+                links.push(userdb[i]);
+            }
+        })
+
+        .catch((error) => {
+            console.log("Resolve Error: %s", error);
+        });
+
+}
+
+function getFile(filename, type="text") { // fetches file
+    return new Promise((resolve, reject) => {
+        const xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onload = () => {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                resolve(xmlhttp.response);
+            } else {
+                reject(xmlhttp.status);
+            }
+        }
+        
+        xmlhttp.responseType = type;
+        xmlhttp.open("GET", filename, true);
+        xmlhttp.send();
+    });
+}
+
+            //  BOOKMARK  \\
+function clear(obj) { // removes all children from object
+    while (obj.firstChild) {
+        obj.removeChild(obj.firstChild);
+    }
+}
+
+function queryItems() {
+    navbar = document.querySelector(".navbar") ? document.querySelector(".navbar") : null;
+    list = document.querySelector(".links-container") ? document.querySelector(".links-container") : null;
+    editBtns = document.querySelector(".links-container .editURL > button") ? list.querySelectorAll(".editURL > button") : null;
+    delBtns = document.querySelector(".links-container .delURL > button") ? list.querySelectorAll(".delURL > button") : null;
+    bb = document.querySelector(".bottomBar") ? document.querySelector(".bottomBar") : null;
+    urlBar = document.querySelector(".bottomBar input[type=url]") ? bb.querySelector("input[type=url]") : null;
+    titleBar = document.querySelector(".bottomBar input[type=text]") ? bb.querySelector("input[type=text]") : null;
+    addBtn = document.querySelector(".bottomBar button") ? bb.querySelector("button") : null;
+}
+
 function createBookmarkBox(link) { // creates DOM for bookmark boxes
     // create and define elements
     let box = document.createElement("div");
@@ -60,43 +112,4 @@ function createBookmarkBox(link) { // creates DOM for bookmark boxes
         }
     }
                 */
-}
-
-function getLinksFromDB(id = 0) {     // gather links from specific .db file
-    getFile(id + ".db", "json")
-        .then((response) => {
-            const userdb = response.links;
-            for (let i = 0; i < userdb.length; i++) {
-                links.push(userdb[i]);
-            }
-        })
-
-        .catch((error) => {
-            console.log("Resolve Error: %s", error);
-        });
-
-}
-
-function getFile(filename, type="text") { // fetches file
-    return new Promise((resolve, reject) => {
-        const xmlhttp = new XMLHttpRequest();
-
-        xmlhttp.onload = () => {
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                resolve(xmlhttp.response);
-            } else {
-                reject(xmlhttp.status);
-            }
-        }
-        
-        xmlhttp.responseType = type;
-        xmlhttp.open("GET", filename, true);
-        xmlhttp.send();
-    });
-}
-
-function clear(obj) { // removes all children from object
-    while (obj.firstChild) {
-        obj.removeChild(obj.firstChild);
-    }
 }

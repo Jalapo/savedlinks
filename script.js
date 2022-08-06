@@ -188,14 +188,3 @@ function saveToLocal() { // saves current bookmarks to localStorage
     localStorage.setItem(`myID`, id);
     localStorage.setItem(`myLinks#${id}`, JSON.stringify(links));
 }
-
-function queryItems() {
-    navbar = document.querySelector(".navbar");
-    list = document.querySelector(".links-container");
-    editBtns = list.querySelectorAll(".editURL > button");
-    delBtns = list.querySelectorAll(".delURL > button");
-    bb = document.querySelector(".bottomBar");
-    urlBar = bb.querySelector("input[type=url]");
-    titleBar = bb.querySelector("input[type=text]");
-    addBtn = bb.querySelector("button");
-}
