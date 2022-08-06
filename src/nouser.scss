@@ -1,5 +1,6 @@
 $desktop: 800px;
 $tab: 570px;
+$bodyBG: hsl(218, 50%, 10%);
 @mixin hidden {
     margin: 0rem;
     padding: 0rem;
@@ -22,7 +23,7 @@ html {
         @extend html;
         display: flex;
         flex-direction: column;
-        background-color: hsl(218, 50%, 10%);
+        background-color: $bodyBG;
     }
 
 }
@@ -56,8 +57,45 @@ html {
     
 }
 
+.loginPrompt {
+    position: absolute;
+    border: 1px solid red;
+    width: 100%;
+    height: 100%;
+    background-color: $bodyBG;
+    color: white;
+    @media screen and (min-width: $desktop) {
+        width: 23%;
+        height: 60%;
+        left: 100%;
+        transform: translate(-100%, 2.5rem);
+        margin-left: auto;
+        background-color: white;
+        color: black;
+    }
+
+    &.hidden {
+        background-color: transparent;
+        color: transparent;
+    }
+
+    p {
+        font-size: 1rem;
+        margin: 0 10%;
+        height: fit-content;
+    }
+
+    input {
+        margin: 0 10% 1rem;
+        padding: 0;
+        width: 80%;
+        // transform: translateY(-100%);
+        font-size: 1rem;
+    }
+}
+
 .logo {
-    position: relative;
+    // position: relative;
     font-family: 'Times New Roman', Times, serif;
     font-size: clamp(6vh, 3rem, 20vw);
     color: hsl(90, 30%, 73%);

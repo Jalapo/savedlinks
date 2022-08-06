@@ -40,8 +40,44 @@ html body {
   margin-left: auto;
 }
 
+.loginPrompt {
+  position: absolute;
+  border: 1px solid red;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(218deg, 50%, 10%);
+  color: white;
+}
+@media screen and (min-width: 800px) {
+  .loginPrompt {
+    width: 23%;
+    height: 60%;
+    left: 100%;
+    transform: translate(-100%, 2.5rem);
+    margin-left: auto;
+    background-color: white;
+    color: black;
+  }
+}
+.loginPrompt.hidden {
+  background-color: transparent;
+  color: transparent;
+}
+.loginPrompt p {
+  font-size: 1rem;
+  margin: 0 10%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.loginPrompt input {
+  margin: 0 10% 1rem;
+  padding: 0;
+  width: 80%;
+  font-size: 1rem;
+}
+
 .logo {
-  position: relative;
   font-family: "Times New Roman", Times, serif;
   font-size: clamp(6vh, 3rem, 20vw);
   color: hsl(90deg, 30%, 73%);
