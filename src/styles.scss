@@ -113,12 +113,15 @@ html {
         padding: 0;
         font-size: 1.7rem;
         font-weight: 600;
-        background-image: radial-gradient(circle, hsl(250, 95%, 0%) 60%, hsl(250, 0%, 100%) 100%);
+        // background-image: radial-gradient(circle, hsl(250, 95%, 0%) 60%, hsl(250, 0%, 100%) 100%);
+        background-color: hsl(255, 95%, 5%);
         border: none;
         border-radius: 3rem;
         cursor: default;
         &:hover {
-            background-image: radial-gradient(circle, hsl(250, 95%, 15%) 60%, hsl(250, 85%, 100%) 100%);
+            background-color: hsl(250, 95%, 15%);
+            cursor: pointer;
+            // hsl(250, 85%, 100%)
         }
     }
 
@@ -239,7 +242,8 @@ html {
         height: 2.5em;
         border-radius: 4em;
         border-color: transparent;
-        background-color: hsl(50, 75%, 57%);
+        // background-color: hsl(50, 75%, 57%);
+        background-color: hsl(200, 75%, 60%);
         cursor: pointer;
     }
 }

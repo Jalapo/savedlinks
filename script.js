@@ -84,15 +84,15 @@ function addLink() { // functionality of add link button
     let title = (titleBar.value) ? titleBar.value : urlBar.value;
     if (urlBar.value) {
         links.push({title: title, url : urlBar.value});
-        readLinks();
+        readLinks('new');
         setupEvents();
         saveToLocal();
     }
     urlBar.value = titleBar.value = "";
-    document.activeElement.blur();
+    collapseBar();
 }
 
-function readLinks() {
+function readLinks(state = 'none') {
     // clear bookmarks from view
     queryItems();
     clear(list);
@@ -101,6 +101,12 @@ function readLinks() {
     for (let i = 0; i < links.length; i++) {
         box = createBookmarkBox(links[i]);
         document.querySelector(".links-container").appendChild(box);
+        if (i == (links.length - 1) && state == 'new') box.style.transform = `scale(0.0)`;
+
+        if (i == (links.length - 1) && state == 'new') {
+            box.style.transition = `all .5s ease-in-out`;
+            setTimeout(() => {box.style.transform = `scale(1.0)`;}, 50);
+        }
     }
 }
 
@@ -176,10 +182,8 @@ function collapseBar() { // "collapses" bottom URL bar and hides URL title input
     queryItems();
     setTimeout(() => {
         if (urlBar.value == "" && titleBar.value == "") { // text inputs are empty
-            if (document.activeElement != titleBar && document.activeElement != urlBar) { // text inputs are unselected
-                bb = document.querySelector(".bottomBar");
-                bb.removeChild(bb.children[0]);
-            }
+            bb = document.querySelector(".bottomBar");
+            bb.removeChild(bb.children[0]);
         }
     }, 10);
 }
