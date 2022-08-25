@@ -89,6 +89,7 @@ function addLink() { // functionality of add link button
         saveToLocal();
     }
     urlBar.value = titleBar.value = "";
+    document.activeElement.blur();
     collapseBar();
 }
 
@@ -106,6 +107,7 @@ function readLinks(state = 'none') {
         if (i == (links.length - 1) && state == 'new') {
             box.style.transition = `all .5s ease-in-out`;
             setTimeout(() => {box.style.transform = `scale(1.0)`;}, 50);
+            setTimeout(() => {box.style.transition = `none`;}, 1000);
         }
     }
 }
@@ -183,7 +185,7 @@ function collapseBar() { // "collapses" bottom URL bar and hides URL title input
     setTimeout(() => {
         if (urlBar.value == "" && titleBar.value == "") { // text inputs are empty
             bb = document.querySelector(".bottomBar");
-            bb.removeChild(bb.children[0]);
+            if (bb.children.length == 2 && document.activeElement.tagName != "INPUT") bb.removeChild(bb.children[0]);
         }
     }, 10);
 }
