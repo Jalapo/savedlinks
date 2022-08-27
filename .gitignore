@@ -1,1 +1,4 @@
 0.db
+nodes/node_modules
+nodes/package*json
+*/creds/*
