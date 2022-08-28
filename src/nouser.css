@@ -41,17 +41,21 @@ html body {
 }
 
 .loginPrompt {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  border: 1px solid red;
   width: 100%;
   height: 100%;
   background-color: hsl(218deg, 50%, 10%);
   color: white;
+  align-items: center;
 }
 @media screen and (min-width: 800px) {
   .loginPrompt {
+    position: absolute;
     width: 23%;
-    height: 60%;
+    width: 30%;
+    max-height: 80vh;
     left: 100%;
     transform: translate(-100%, 2.5rem);
     margin-left: auto;
@@ -60,21 +64,34 @@ html body {
   }
 }
 .loginPrompt.hidden {
-  background-color: transparent;
-  color: transparent;
+  transform: scale(0);
 }
-.loginPrompt p {
-  font-size: 1rem;
-  margin: 0 10%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+.loginPrompt :first-child {
+  margin: 30% 0 10%;
+}
+.loginPrompt .promptTitle {
+  align-self: center;
 }
 .loginPrompt input {
-  margin: 0 10% 1rem;
+  margin: 0 10% 5%;
   padding: 0;
   width: 80%;
-  font-size: 1rem;
+  padding: 0.4rem 0;
+  font-size: 1.2rem;
+  border-radius: 10vw;
+  text-indent: 1rem;
+}
+@media screen and (min-width: 800px) {
+  .loginPrompt input {
+    font-size: 1rem;
+    padding: 0.3rem 0;
+  }
+}
+.loginPrompt button {
+  height: 4vw;
+  width: 16vw;
+  margin-top: 5%;
+  border-radius: 0.8rem;
 }
 
 .logo {
