@@ -1,5 +1,4 @@
 0.db
-nodes/node_modules
-nodes/package*json
+node_modules/
 */creds/*
 !*/creds/00.json
