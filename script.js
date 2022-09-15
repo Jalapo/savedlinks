@@ -25,7 +25,7 @@ window.onload = () => { // setup
 }
 
 function getLinks() { // get links from localStorage if available, otherwise obtain from DB file
-    if (localStorage.getItem(`myID`)) { /* 
+    if (localStorage.getItem(`myID`) !== null) { /* 
             check if myID is available (done), then after check if myID has a default value
             if false (user's first visit) --> give myID a default value
             if true (user visited before but has not registered) --> nothing
