@@ -34,9 +34,8 @@ function getLinks() { // get links from localStorage if available, otherwise obt
                                         */ 
         id = localStorage.getItem(`myID`);
         links = JSON.parse(localStorage.getItem(`myLinks#${id}`));
-        console.log(localStorage.getItem(`myID`));
-        // console.log(links);
-    } else { // this needs to provide a different page layout (React?) so the user can 
+        console.log(localStorage.getItem(`local user id: ${myID}`)); // DELETE FOR PRODUCTION --------!!!!!!
+    } else { // this needs to change later to provide a different page layout (React?) so the user can login or register
         id = 0;
         getLinksFromDB(id);
         setTimeout(saveToLocal, 1000);
@@ -86,7 +85,7 @@ function addLink() { // functionality of add link button
         links.push({title: title, url : urlBar.value});
         readLinks('new');
         setupEvents();
-        saveToLocal();
+        saveToAll();
     }
     urlBar.value = titleBar.value = "";
     document.activeElement.blur();
@@ -126,7 +125,7 @@ function delClick(boxNum) { // deletes box (on click)
     links.splice(boxNum, 1); // remove from array
     readLinks(); // update screen
     setupEvents(); // reconfigure events
-    saveToLocal(); // save changes
+    saveToAll(); // save changes
 }
 
 function adjustScreen() { // changes view of app depending on screen size
@@ -190,7 +189,24 @@ function collapseBar() { // "collapses" bottom URL bar and hides URL title input
     }, 10);
 }
 
+function saveToAll() {
+    saveToLocal(); // one line left needs to be replaced when cloud is implemented
+    // uncomment when developed
+    // saveToCloud(); 
+}
+
 function saveToLocal() { // saves current bookmarks to localStorage
     localStorage.setItem(`myID`, id);
     localStorage.setItem(`myLinks#${id}`, JSON.stringify(links));
+}
+
+function saveToCloud() {
+    // at some point, this should block spam inputs:
+    // update a global dummy variable [cloudReqs] by +1, expected value at start is 0
+    // setTimeout for 5s-> check if variable value has persisted (cloudReqs == 1)
+    // - if true (unchanged): call 'updateDB()' to
+}
+
+function updateDB() {
+
 }
