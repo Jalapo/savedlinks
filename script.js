@@ -34,7 +34,7 @@ function getLinks() { // get links from localStorage if available, otherwise obt
                                         */ 
         id = localStorage.getItem(`myID`);
         links = JSON.parse(localStorage.getItem(`myLinks#${id}`));
-        console.log(localStorage.getItem(`local user id: ${myID}`)); // DELETE FOR PRODUCTION --------!!!!!!
+        console.log(`local user id: ${id}`); // DELETE FOR PRODUCTION --------!!!!!!
     } else { // this needs to change later to provide a different page layout (React?) so the user can login or register
         id = 0;
         getLinksFromDB(id);
