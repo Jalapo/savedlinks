@@ -204,7 +204,7 @@ function saveToCloud() {
     // at some point, this should block spam inputs:
     // update a global dummy variable [cloudReqs] by +1, expected value at start is 0
     // setTimeout for 5s-> check if variable value has persisted (cloudReqs == 1)
-    // - if true (unchanged): call 'updateDB()' to
+    // - if true (unchanged): call 'updateDB()' to push changes
 }
 
 function updateDB() {
