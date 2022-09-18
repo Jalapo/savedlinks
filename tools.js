@@ -1,10 +1,13 @@
         // FILES \\
-function getLinksFromDB(id = 0) {     // gather links from specific .db file
+function getLinksFromDB(id = 0, array = [], callback = null) {     // gather links from specific .db file
     getFile(id + ".db", "json")
         .then((response) => {
             const userdb = response.links;
             for (let i = 0; i < userdb.length; i++) {
-                links.push(userdb[i]);
+                array.push(userdb[i]);
+            }
+            if (callback !== null) {
+                callback();
             }
         })
 

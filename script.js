@@ -1,3 +1,10 @@
+/* THINGS TO ADD:
+use 'nouser' page for users with no localStorage id
+    - change else in 'getLinks()' to change with React
+    - swap to JS file used to handle 'nouser' page (Next.js?)
+
+*/
+
 let links = [];
 // Break off point for tablets
 // const viewBreakpoint = window.matchMedia("(max-width: 800px), (max-height: 570px)");
@@ -17,15 +24,13 @@ let titleBar;
 let addBtn;
 
 window.onload = () => { // setup
-    // localStorage.clear()
-    getLinks();
-    readLinks();
-    setTimeout(initSetup, 100);
-    setTimeout(setupEvents, 100);
+    loadUser();
 }
 
-function getLinks() { // get links from localStorage if available, otherwise obtain from DB file
-    if (localStorage.getItem(`myID`) !== null) { /* 
+function loadUser() { // get links from localStorage if available, otherwise obtain from DB file
+    localStorage.clear(); // DELETE FOR PRODUCTION --------!!!!!!
+    if (localStorage.getItem(`myID`) !== null) { 
+        /* FUTURE LOGIC:
             check if myID is available (done), then after check if myID has a default value
             if false (user's first visit) --> give myID a default value
             if true (user visited before but has not registered) --> nothing
@@ -34,12 +39,15 @@ function getLinks() { // get links from localStorage if available, otherwise obt
                                         */ 
         id = localStorage.getItem(`myID`);
         links = JSON.parse(localStorage.getItem(`myLinks#${id}`));
+        setup();
         console.log(`local user id: ${id}`); // DELETE FOR PRODUCTION --------!!!!!!
     } else { // this needs to change later to provide a different page layout (React?) so the user can login or register
         id = 0;
-        getLinksFromDB(id);
-        setTimeout(saveToLocal, 1000);
+        console.log('no user, default id: 0');
+        getLinksFromDB(id, links, ()=>{saveToAll(); setup();});
+
     }
+    function setup() {readLinks(); initSetup(); eventSetup();}
 }
 
 
@@ -59,7 +67,7 @@ function initSetup() { // initial setup of HTML element events
     adjustScreen();
 }
 
-function setupEvents() { // setup events for dynamic HTML elements
+function eventSetup() { // setup events for dynamic HTML elements
     queryItems();
 
     for (let i = 0; i < delBtns.length; i++) {
@@ -84,7 +92,7 @@ function addLink() { // functionality of add link button
     if (urlBar.value) {
         links.push({title: title, url : urlBar.value});
         readLinks('new');
-        setupEvents();
+        eventSetup();
         saveToAll();
     }
     urlBar.value = titleBar.value = "";
@@ -111,11 +119,6 @@ function readLinks(state = 'none') {
     }
 }
 
-function openLink() {
-
-}
-
-
 
 function editClick(boxNum) { // change properties of bookmark (on click)
     alert("clicked edit");
@@ -124,7 +127,7 @@ function editClick(boxNum) { // change properties of bookmark (on click)
 function delClick(boxNum) { // deletes box (on click)
     links.splice(boxNum, 1); // remove from array
     readLinks(); // update screen
-    setupEvents(); // reconfigure events
+    eventSetup(); // reconfigure events
     saveToAll(); // save changes
 }
 
