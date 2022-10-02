@@ -42,8 +42,8 @@ function loadUser() { // get links from localStorage if available, otherwise obt
         setup();
         console.log(`local user id: ${id}`); // DELETE FOR PRODUCTION --------!!!!!!
     } else { // this needs to change later to provide a different page layout (React?) so the user can login or register
-        id = 0;
-        console.log('no user, default id: 0');
+        id = '00';
+        console.log('no user, default id: 00');
         getLinksFromDB(id, links, ()=>{saveToAll(); setup();});
 
     }

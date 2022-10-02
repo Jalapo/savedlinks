@@ -30,7 +30,8 @@ function getFile(filename, type="text") { // fetches file
         }
         
         xmlhttp.responseType = type;
-        xmlhttp.open("GET", filename, true);
+        xmlhttp.open("GET", `/login/${filename}`, true);
+        // xmlhttp.open("GET", filename, true);
         xmlhttp.send();
     });
 }

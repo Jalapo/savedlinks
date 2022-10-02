@@ -1,4 +1,4 @@
-0.db
+00.db
 node_modules/
 */creds/*
-!*/creds/00.json
+!*/creds/00.db
