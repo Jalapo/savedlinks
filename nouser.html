@@ -5,28 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, user-scalable=0">
     <meta name="theme-color" content="#000000">
-    <meta property="og:image" content="src/svlinks_logo.png" />
-    <title>Saved Links</title>
+    <meta property="og:image" content="./src/svlinks_logo.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
+    <title>Saved Links</title>
+
     <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="src/nouser.css">
-    <script type="text/javascript" src="tools.js"></script>
+    <link rel="stylesheet" href="./src/nouser.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <!-- <script type="text/javascript" src="script.js"></script> -->
-    <script type="text/javascript" src="nouser.js"></script>
+    <script type="text/javascript" src="./tools.js"></script>
+    <script type="text/javascript" src="./nouser.js"></script>
 </head>
 <body>
     <nav class="navbar">
         <div>
-            <span>Login</span>
-            <span>Register</span>
+            <span class="no-sel">Login</span>
+            <span class="no-sel">Register</span>
         </div>
 
         
         <!-- <div class="navbar-button"><span>≡</span></div> -->
     </nav>
 
-    <div class="loginPrompt">
+    <div class="loginPrompt hidden">
+        <div class="top-bar">
+            <span id="close-btn" onclick="promptLogin(0)"><</span>
+            <a class="logo"><span>Safe Links</span></a>
+        </div>
         <span class="promptTitle">Text Area</span>
         <input type="text" placeholder="Username">
         <input type="password" placeholder="Password">

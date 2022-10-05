@@ -108,13 +108,13 @@ function readLinks(state = 'none') {
     // display each bookmark in 'links' array
     for (let i = 0; i < links.length; i++) {
         box = createBookmarkBox(links[i]);
-        document.querySelector(".links-container").appendChild(box);
-        if (i == (links.length - 1) && state == 'new') box.style.transform = `scale(0.0)`;
+        $(".links-container").append(box);
+        if (i == (links.length - 1) && state == 'new') box.css('transform', `scale(0.0)`);
 
         if (i == (links.length - 1) && state == 'new') {
-            box.style.transition = `all .5s ease-in-out`;
-            setTimeout(() => {box.style.transform = `scale(1.0)`;}, 50);
-            setTimeout(() => {box.style.transition = `none`;}, 1000);
+            box.css('transition', `all .5s ease-in-out`);
+            setTimeout(() => {box.css('transform', `scale(1.0)`);}, 50);
+            setTimeout(() => {box.css('transition', `none`);}, 1000);
         }
     }
 }

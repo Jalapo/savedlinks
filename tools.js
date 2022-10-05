@@ -1,5 +1,6 @@
+
         // FILES \\
-function getLinksFromDB(id = 0, array = [], callback = null) {     // gather links from specific .db file
+function getLinksFromDB(id = "00", array = [], callback = null) {     // gather links from specific .db file
     getFile(id + ".db", "json")
         .then((response) => {
             const userdb = response.links;
@@ -17,7 +18,8 @@ function getLinksFromDB(id = 0, array = [], callback = null) {     // gather lin
 
 }
 
-function getFile(filename, type="text") { // fetches file
+function getFile(filename, type="text", finish) { // fetches file
+    
     return new Promise((resolve, reject) => {
         const xmlhttp = new XMLHttpRequest();
 
@@ -30,10 +32,20 @@ function getFile(filename, type="text") { // fetches file
         }
         
         xmlhttp.responseType = type;
-        xmlhttp.open("GET", `/login/${filename}`, true);
-        // xmlhttp.open("GET", filename, true);
+        // xmlhttp.open("GET", `https://javenp.com/savedlinks/login/${filename}`, true);
+        xmlhttp.open("GET", filename, true);
         xmlhttp.send();
     });
+    
+    /*
+    $.ajax({
+        type: "POST",
+        url: "/login",
+        data: JSON.parse(`{"user":"${data.user}}", "pw":"${data.pw}"`),
+        success: finish,
+
+    })
+    */
 }
 
             //  BOOKMARK  \\
@@ -55,65 +67,40 @@ function queryItems() {
 }
 
 function createBookmarkBox(link) { // creates DOM for bookmark boxes
-    // create and define elements
-    let box = document.createElement("div");
-
-    let urlTextDiv = document.createElement("div");
-    let urlTitle = document.createElement("div");
-    let urlText = document.createElement("div")
-
-    let buttonsDiv = document.createElement("div");
-    let editDiv = document.createElement("div");
-    let delDiv = document.createElement("div");
-
-    // box click event
-    box.classList.add("box","click");
-    box.addEventListener("click", () => {
-        window.open('http://' + link.url);
-    });
-
-    // apply classes
-    urlTextDiv.classList.add("urlTextBox");
-    urlTitle.classList.add("urlTitle");
-    urlText.classList.add("click","subtext");
-    buttonsDiv.classList.add("boxButtons");
-    editDiv.classList.add("editURL");
-    delDiv.classList.add("delURL");
+    let box = $(`<div class='box click' onclick="window.open('http://${link.url}')">
+        <div class='boxButtons'>
+            <div class="editURL"><button>✎</button></div>
+            <div class="delURL"><button>X</button></div>
+        </div>
+        <div class="urlTextBox">
+            <div class="urlTitle">${link.title}</div>
+            <div class="click subtext">  </div>
+        </div>
+    </div>`);
 
     // Are the title and URL the same? (shared values when title is not given by User)
-    if (link.title == link.url) { 
-        urlText.appendChild(document.createTextNode("h")); // if so, create invisible text element for CSS responsive size
-        urlText.style.color = "transparent";
-        urlTitle.style.marginBottom = "-0.2rem"; 
-    } else {                                               // otherwise, input the URl normally
-        urlText.appendChild(document.createTextNode(link.url));
+    if (link.title == link.url) {
+        box.find(".subtext").text("h");
+        box.find(".subtext").css("color", "transparent");
+        box.find(".urlTitle").css("margin-bottom", "-0.2rem");
+        // urlText.appendChild(document.createTextNode("h")); // if so, create invisible subtext element for CSS responsive size
+        // urlText.style.color = "transparent";
+    } else {                                               // otherwise, input the URL normally
+        box.find(".subtext").text(link.url);
+        // urlText.appendChild(document.createTextNode(link.url));
     }
 
-    // construct DOM
-    urlTitle.appendChild(document.createTextNode(link.title));
-    urlTextDiv.appendChild(urlTitle);
-    urlTextDiv.appendChild(urlText);
-
-    editDiv.appendChild(document.createElement("button"));
-    editDiv.querySelector(".editURL > button").appendChild(document.createTextNode("✎"));
-    delDiv.appendChild(document.createElement("button"));
-    delDiv.querySelector(".delURL > button").appendChild(document.createTextNode("X"));
-
-    buttonsDiv.appendChild(editDiv);
-    buttonsDiv.appendChild(delDiv);
-    box.appendChild(buttonsDiv);
-    box.appendChild(urlTextDiv);
     
-
-    return box; /* {
-        urlTextDiv {
-            urlTitle {link.name}
-            urlText {link.url}
-        }
-        buttonsDiv {
-            editDiv {class: "editURL"}
-            delDiv {class: "delURL"}
-        }
-    }
-                */
+    return box;
 }
+
+/*
+urlTextBox {
+        urlTitle {link.name}
+        urlText {link.url}
+    }
+buttonsDiv {
+        editDiv {class: "editURL"}
+        delDiv {class: "delURL"}
+}
+*/
