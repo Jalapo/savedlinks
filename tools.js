@@ -1,9 +1,11 @@
 
         // FILES \\
 function getLinksFromDB(id = "00", array = [], callback = null) {     // gather links from specific .db file
-    getFile(id + ".db", "json")
+    getFile(id, "json")
         .then((response) => {
-            const userdb = response.links;
+            console.log(JSON.parse(response));
+            const userdb = JSON.parse(JSON.parse(response).links);
+            console.log(userdb[4]);
             for (let i = 0; i < userdb.length; i++) {
                 array.push(userdb[i]);
             }
@@ -18,34 +20,20 @@ function getLinksFromDB(id = "00", array = [], callback = null) {     // gather 
 
 }
 
-function getFile(filename, type="text", finish) { // fetches file
-    
-    return new Promise((resolve, reject) => {
-        const xmlhttp = new XMLHttpRequest();
+async function getFile(key, type="text", finish) { // fetches file
+    // let location = 'http://127.0.0.1:3002/api/links/';
+    let location = '/api/links/';
 
-        xmlhttp.onload = () => {
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                resolve(xmlhttp.response);
-            } else {
-                reject(xmlhttp.status);
-            }
-        }
-        
-        xmlhttp.responseType = type;
-        // xmlhttp.open("GET", `https://javenp.com/savedlinks/login/${filename}`, true);
-        xmlhttp.open("GET", filename, true);
-        xmlhttp.send();
+    let userdata = await fetch(`${location}${key}`, {method:"GET"});
+    if (userdata.status == 409) {setTimeout(window.open('./init.html','_self'),30); throw null;}
+    // create an empty string and push all string buffers inputs (each character) into it
+    let s = '';
+    return new Promise((resolve,rej)=>{
+        userdata.text().then( (fulfilled) => {
+            // return file data
+            resolve(fulfilled);
+        });
     });
-    
-    /*
-    $.ajax({
-        type: "POST",
-        url: "/login",
-        data: JSON.parse(`{"user":"${data.user}}", "pw":"${data.pw}"`),
-        success: finish,
-
-    })
-    */
 }
 
             //  BOOKMARK  \\
@@ -104,3 +92,19 @@ buttonsDiv {
         delDiv {class: "delURL"}
 }
 */
+
+
+function changePage(page) {
+    // main, nouser, init
+    let script = $(`<script type='text/javascript'>  </script>`);
+    let styles = $(`<link rel='stylesheet' />`);
+
+
+    switch (page) {
+        case 'main':
+            
+            break;
+        case 'nouser':
+        case 'init':
+    }
+}

@@ -1,11 +1,6 @@
-/* THINGS TO ADD:
-use 'nouser' page for users with no localStorage id
-    - change else in 'getLinks()' to change with React
-    - swap to JS file used to handle 'nouser' page (Next.js?)
-
-*/
-
-let links = [];
+var userLinks = [];
+// var domain = 'http://127.0.0.1:3002/';
+var domain = '/';
 // Break off point for tablets
 // const viewBreakpoint = window.matchMedia("(max-width: 800px), (max-height: 570px)");
 
@@ -13,7 +8,7 @@ let links = [];
 const viewBreakpoint = window.matchMedia("(max-width: 890px), (max-height: 570px)");
 // const thinTab = window.matchMedia("(max-height: 570px)");
 let view = "list";
-let id;
+const authKey = localStorage.getItem('authKey');
 let navbar;
 let list;
 let editBtns;
@@ -23,30 +18,39 @@ let urlBar;
 let titleBar;
 let addBtn;
 
-window.onload = () => { // setup
+window.addEventListener("DOMContentLoaded", () => { // setup
+    // remove old stored storage values
+    fixUpOld();
+    // attempt to load user with authkey
     loadUser();
-}
+});
 
-function loadUser() { // get links from localStorage if available, otherwise obtain from DB file
-    localStorage.clear(); // DELETE FOR PRODUCTION --------!!!!!!
-    if (localStorage.getItem(`myID`) !== null) { 
-        /* FUTURE LOGIC:
-            check if myID is available (done), then after check if myID has a default value
-            if false (user's first visit) --> give myID a default value
-            if true (user visited before but has not registered) --> nothing
-            after: feed unregistered "Google-style" page with bottom button to reveal "Sign up" and "Login" for mobile
-                                                         with default header for "Signup" and "Login" buttons for desktop
-                                        */ 
-        id = localStorage.getItem(`myID`);
-        links = JSON.parse(localStorage.getItem(`myLinks#${id}`));
-        setup();
-        console.log(`local user id: ${id}`); // DELETE FOR PRODUCTION --------!!!!!!
-    } else { // this needs to change later to provide a different page layout (React?) so the user can login or register
-        id = '00';
-        console.log('no user, default id: 00');
-        getLinksFromDB(id, links, ()=>{saveToAll(); setup();});
+function loadUser() { // get links from localStorage if available, otherwise obtain from DB file 
+    if (localStorage.getItem(`authKey`) !== null) { 
+                                        
+        // pull id from localStorage
+        let key = localStorage.getItem(`authKey`);
 
+        // force reset authkey if contains invalid chars (id should only contain numbers or letters)
+        if (/^\w+$/i.test(key) ==  false) {
+            localStorage.clear();
+            sessionStorage.clear();
+            // redirect to nouser page
+            window.history.replaceState(null, '', './nouser.html');
+        }
+
+        // check if links are in sessionStorage, get from cloud if not present, else use session links
+        let tempLinks = JSON.parse(sessionStorage.getItem("links"));
+        if (tempLinks == null) getLinksFromDB(authKey, userLinks, ()=>{saveToAll(); setup();});
+        else {
+            userLinks = tempLinks;
+            setup();
+        }
+    } else {
+        // if no authKey, redirect to nouser page
+        window.history.replaceState(null, '', './nouser.html');
     }
+
     function setup() {readLinks(); initSetup(); eventSetup();}
 }
 
@@ -90,7 +94,7 @@ function addLink() { // functionality of add link button
 
     let title = (titleBar.value) ? titleBar.value : urlBar.value;
     if (urlBar.value) {
-        links.push({title: title, url : urlBar.value});
+        userLinks.push({title: title, url : urlBar.value});
         readLinks('new');
         eventSetup();
         saveToAll();
@@ -106,12 +110,12 @@ function readLinks(state = 'none') {
     clear(list);
 
     // display each bookmark in 'links' array
-    for (let i = 0; i < links.length; i++) {
-        box = createBookmarkBox(links[i]);
+    for (let i = 0; i < userLinks.length; i++) {
+        box = createBookmarkBox(userLinks[i]);
         $(".links-container").append(box);
-        if (i == (links.length - 1) && state == 'new') box.css('transform', `scale(0.0)`);
+        if (i == (userLinks.length - 1) && state == 'new') box.css('transform', `scale(0.0)`);
 
-        if (i == (links.length - 1) && state == 'new') {
+        if (i == (userLinks.length - 1) && state == 'new') {
             box.css('transition', `all .5s ease-in-out`);
             setTimeout(() => {box.css('transform', `scale(1.0)`);}, 50);
             setTimeout(() => {box.css('transition', `none`);}, 1000);
@@ -125,7 +129,7 @@ function editClick(boxNum) { // change properties of bookmark (on click)
 }
 
 function delClick(boxNum) { // deletes box (on click)
-    links.splice(boxNum, 1); // remove from array
+    userLinks.splice(boxNum, 1); // remove from array
     readLinks(); // update screen
     eventSetup(); // reconfigure events
     saveToAll(); // save changes
@@ -195,12 +199,12 @@ function collapseBar() { // "collapses" bottom URL bar and hides URL title input
 function saveToAll() {
     saveToLocal(); // one line left needs to be replaced when cloud is implemented
     // uncomment when developed
-    // saveToCloud(); 
+    saveToCloud(); 
 }
 
 function saveToLocal() { // saves current bookmarks to localStorage
-    localStorage.setItem(`myID`, id);
-    localStorage.setItem(`myLinks#${id}`, JSON.stringify(links));
+    localStorage.setItem("authKey", authKey);
+    sessionStorage.setItem("links", JSON.stringify(userLinks));
 }
 
 function saveToCloud() {
@@ -208,8 +212,27 @@ function saveToCloud() {
     // update a global dummy variable [cloudReqs] by +1, expected value at start is 0
     // setTimeout for 5s-> check if variable value has persisted (cloudReqs == 1)
     // - if true (unchanged): call 'updateDB()' to push changes
+    updateDB();
 }
 
 function updateDB() {
+    // let cloudPush = JSON.stringify({links: sessionStorage.getItem("links")});
+    let cloudPush = JSON.stringify(userLinks);
+    let data = new FormData();
+    data.append('links', cloudPush);
+    fetch(`${domain}api/links/update/${localStorage.getItem('authKey')}`, {
+        method: "POST",
+        body: new URLSearchParams(data)
+    }).then(r=>console.log('DB updated'));
+}
 
+function fixUpOld() {
+    // --- LOCALSTORAGE ----
+    // remove 'myID' and relative items (12/26/22)
+    if (localStorage.getItem('myID') || localStorage.length != 1) {
+        let aK = localStorage.getItem('authKey');
+        localStorage.clear();
+        if (aK) localStorage.setItem('authKey',aK);
+    }
+    // --- END LOCALSTORAGE ---
 }
