@@ -16,8 +16,7 @@ html body {
   background-color: hsl(218deg, 50%, 10%);
 }
 html .no-sel {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
+  -webkit-user-select: none; /* Safari */ /* IE 10 and IE 11 */
   -moz-user-select: none;
        user-select: none; /* Standard syntax */
 }
@@ -63,7 +62,6 @@ html .no-sel {
     padding: 3% 0%;
     position: absolute;
     width: 20%;
-    height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
     left: 100%;
@@ -174,7 +172,6 @@ html .no-sel {
   width: 100vw;
   padding: 30vh 0vh 0vh;
   flex-direction: row;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   flex-wrap: wrap;
@@ -200,7 +197,6 @@ html .no-sel {
 .bottomBar > .flex-container input[type=url] {
   height: 3em;
   flex: 1 1 auto;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   padding: 0vw min(20vw, 8rem) 0vw min(20vw, 8rem);
