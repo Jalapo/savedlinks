@@ -10,7 +10,7 @@ $tab: 570px;
 
 html {
     height: 100%;
-    font-family: system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: "Inter", system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1.2rem;
     margin: 0px;
     padding: 0px;
@@ -23,17 +23,18 @@ html {
         display: flex;
         flex-direction: column;
         background-color: hsl(218, 50%, 10%);
+        #root,#app {@extend body; display: flex; flex-direction: column; overflow: hidden;}
     }
 
 }
 
 .navbar {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Inconsolata", 'Times New Roman', Times, serif;
     height: 2.5rem;
     flex: 0 0 1;
     display: flex;
     gap: 2rem;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem,4.4vw,1.5rem);
     font-weight: 650;
     align-items: center;
     padding: 0.4rem 2rem 0.4rem 0rem;
@@ -95,7 +96,7 @@ html {
     flex-direction: row-reverse;
     
     @media screen and (min-width: $desktop) {
-        width: clamp(16rem, 30%, 20rem);
+        width: clamp(14rem, 30%, 16rem);
         height: fit-content;
         padding: 0;
         flex-direction: column-reverse;
@@ -199,13 +200,21 @@ html {
 
 
 .bottomBar {
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
     column-gap: 1.5rem;
     row-gap: 0.5rem;
     padding: 0.5rem 0.5rem 0.5rem;
+    
     margin-top: 0.2rem; /* trying to fix awkward scrollbar length */
     background-color: hsl(218, 50%, 15%);
     border-radius: 0.7rem 0.7rem 0rem 0rem;
+    @media screen and (min-width: $desktop) {
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 0.5rem;
+        border-radius: 1rem;
+    }
 
     .flex-container {
         display: flex;
@@ -226,12 +235,20 @@ html {
             border-color: hsl(220, 80%, 70%);
             outline: none;
         }
+        @media screen and (min-width: $desktop) {
+            // max-width: 50vw;
+            width: clamp(20rem,50vw,35rem);
+            // max-width: 20rem;
+        }
     }
 
     input[type=text] {
         @extend [type=url];
         margin-bottom: 0.5rem;
+        align-self: center;
         width: 35%;
+        text-align: center;
+        text-indent: 0rem;
     }
 
     button {

@@ -1,6 +1,7 @@
+function vars() {
 var userLinks = [];
 // var domain = 'http://127.0.0.1:3002/';
-var domain = '/';
+// var domain = '/';
 // Break off point for tablets
 // const viewBreakpoint = window.matchMedia("(max-width: 800px), (max-height: 570px)");
 
@@ -8,8 +9,7 @@ var domain = '/';
 const viewBreakpoint = window.matchMedia("(max-width: 890px), (max-height: 570px)");
 // const thinTab = window.matchMedia("(max-height: 570px)");
 let view = "list";
-const authKey = localStorage.getItem('authKey');
-let navbar;
+// let navbar;
 let list;
 let editBtns;
 let delBtns;
@@ -17,42 +17,21 @@ let bb;
 let urlBar;
 let titleBar;
 let addBtn;
+}
 
 window.addEventListener("DOMContentLoaded", () => { // setup
+    // setup init variables
+    // vars();
     // remove old stored storage values
-    fixUpOld();
     // attempt to load user with authkey
-    loadUser();
 });
-
-function loadUser() { // get links from localStorage if available, otherwise obtain from DB file 
-    if (localStorage.getItem(`authKey`) !== null) { 
-                                        
-        // pull id from localStorage
-        let key = localStorage.getItem(`authKey`);
-
-        // force reset authkey if contains invalid chars (id should only contain numbers or letters)
-        if (/^\w+$/i.test(key) ==  false) {
-            localStorage.clear();
-            sessionStorage.clear();
-            // redirect to nouser page
-            window.history.replaceState(null, '', './nouser.html');
-        }
-
-        // check if links are in sessionStorage, get from cloud if not present, else use session links
-        let tempLinks = JSON.parse(sessionStorage.getItem("links"));
-        if (tempLinks == null) getLinksFromDB(authKey, userLinks, ()=>{saveToAll(); setup();});
-        else {
-            userLinks = tempLinks;
-            setup();
-        }
-    } else {
-        // if no authKey, redirect to nouser page
-        window.history.replaceState(null, '', './nouser.html');
-    }
-
-    function setup() {readLinks(); initSetup(); eventSetup();}
-}
+authKey = localStorage.getItem('authKey');
+fixUpOld();
+setup();
+function firstSetup() {saveToAll();} 
+function setup() {readLinks(); initSetup(); eventSetup();}
+// if (localStorage.getItem(`authKey`) !== null) { 
+if (!document.cookie.includes("visited")) document.cookie = "visited=1; expires=Tue, 31 Dec 2199 12:00:00 UTC";
 
 
 
@@ -136,6 +115,7 @@ function delClick(boxNum) { // deletes box (on click)
 }
 
 function adjustScreen() { // changes view of app depending on screen size
+    return 1;
     queryItems();
     //clear navbar and add default elements (logo)
     clear(navbar);
@@ -143,7 +123,7 @@ function adjustScreen() { // changes view of app depending on screen size
     logo.classList.add("logo");
     logo.appendChild(document.createTextNode("Safe Links"));
 
-
+    /*
     if (viewBreakpoint.matches) { // is this a mobile device?
         // if so, create a header expand button
         let nbExpand = document.createElement("span");
@@ -167,6 +147,7 @@ function adjustScreen() { // changes view of app depending on screen size
         // add to navbar
         navbar.appendChild(container);
     }
+    */
 }
 
 function expandBar() { // "expands" bottom URL bar to show URL title input box
@@ -218,18 +199,28 @@ function saveToCloud() {
 function updateDB() {
     // let cloudPush = JSON.stringify({links: sessionStorage.getItem("links")});
     let cloudPush = JSON.stringify(userLinks);
+    // console.log(userLinks);
     let data = new FormData();
     data.append('links', cloudPush);
+    // console.log(`pushed: ${cloudPush}`);
     fetch(`${domain}api/links/update/${localStorage.getItem('authKey')}`, {
         method: "POST",
         body: new URLSearchParams(data)
-    }).then(r=>console.log('DB updated'));
+    }).then(r=>{
+        if (r.status == 409){
+            sessionStorage.clear();
+            localStorage.clear();
+            reactRender("default");
+        } 
+        else console.log('DB updated');
+});
 }
 
 function fixUpOld() {
     // --- LOCALSTORAGE ----
     // remove 'myID' and relative items (12/26/22)
-    if (localStorage.getItem('myID') || localStorage.length != 1) {
+    // added user to localStorage, localStorage.length = 2 (only when logged in); (2/27/23)
+    if (localStorage.getItem('myID') || localStorage.length != 2) {
         let aK = localStorage.getItem('authKey');
         localStorage.clear();
         if (aK) localStorage.setItem('authKey',aK);

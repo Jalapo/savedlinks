@@ -1,11 +1,11 @@
-let navbar;
-let loginPromptAction = 0; //  1 = login, 2 = register
+// let navbar;
 // let domain = 'http://127.0.0.1:3002/';
-let domain = '/';
+// let domain = '/';
 
-window.addEventListener("DOMContentLoaded", () => {
+/*window.addEventListener("DOMContentLoaded", () => {
 a();
-});
+}); */
+a();
 function a() {
     // initialize common variables
     queryItems();
@@ -26,7 +26,8 @@ function promptLogin(action) { // action: 1 = login, 2 = register
     // if login prompt is hidden, bring it into view. otherwise check if should be hidden
     let func = prompt.hasClass("hidden") ? () => {max();} :
     ()=>{
-        if (action == loginPromptAction || action == 0) {min(); action = 0;} // if the current auth page is the same as the clicked button, minimize and change action var for changePage();
+        // if the current auth page is the same as the clicked button, minimize and change action var for changePage();
+        if (action == loginPromptAction || action == 0) {min(); action = 0;} 
     };
     func();
     changePage(action);
@@ -63,8 +64,13 @@ function setupFormEvents() {
         form.append('pw', pwDOM.value);
         fetch(`${domain}${action}`, {body: new URLSearchParams(form), method: "POST"}).then(res=>{
             res.text().then(str=>{
-                localStorage.setItem('authKey',str);
-                window.open('./','_self');
+                console.log(`prev key: ${localStorage.getItem('authKey')}`);
+                localStorage.setItem('authKey',str); // store authkey
+                localStorage.setItem('user',userDOM.value); // store username
+                authKey = str;
+                console.log(`new key: ${localStorage.getItem('authKey')}`);
+                // render app
+                getLinksFromDB(str, userLinks, ()=>{reactRender("loggedin");});
             });
         });
     });

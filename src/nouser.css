@@ -1,34 +1,38 @@
-html, html body {
+html, html body, html body #root, html body #app {
   height: 100%;
-  font-family: system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Inter", system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.2rem;
   margin: 0px;
   padding: 0px;
+  overflow: hidden;
 }
 @media screen and (min-width: 800px) {
-  html, html body {
+  html, html body, html body #root, html body #app {
     font-size: 1.5rem;
+    font-size: clamp(1.3rem, 2.5vw, 1.5rem);
   }
 }
-html body {
-  display: flex;
-  flex-direction: column;
+html body, html body #root, html body #app {
   background-color: hsl(218deg, 50%, 10%);
 }
-html .no-sel {
+html body #root, html body #app {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+html .no-sel, html body #root .no-sel, html body #app .no-sel {
   -webkit-user-select: none; /* Safari */ /* IE 10 and IE 11 */
   -moz-user-select: none;
        user-select: none; /* Standard syntax */
 }
 
 .navbar {
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Inconsolata", serif;
   height: 2.5rem;
   flex: 0 0 1;
   display: flex;
   gap: 2rem;
   font-size: min(6.5vw, 1.1rem);
-  font-weight: 650;
   align-items: center;
   padding: 0vw 1vw 0vw 0vw;
   background-color: hsl(218deg, 50%, 10%);
@@ -47,6 +51,7 @@ html .no-sel {
 
 .loginPrompt {
   display: flex;
+  font-family: "Inter", "Times New Roman", Times, serif;
   flex-direction: column;
   position: absolute;
   width: 100%;
@@ -54,6 +59,7 @@ html .no-sel {
   background-color: hsl(218deg, 50%, 10%);
   color: white;
   align-items: center;
+  z-index: 1;
 }
 @media screen and (min-width: 570px) {
   .loginPrompt {
@@ -81,20 +87,25 @@ html .no-sel {
   transform: scale(0);
 }
 .loginPrompt .top-bar {
-  display: flex;
-  justify-content: center;
   width: 100%;
-  position: absolute;
+  padding-top: 0.5rem;
+  position: relative;
 }
 .loginPrompt .top-bar #close-btn {
   font-size: 1.5rem;
   color: hsl(0deg, 0%, 80%);
+  font-weight: 600;
+  cursor: pointer;
+  height: -moz-fit-content;
+  height: fit-content;
   position: absolute;
-  top: 15%;
-  left: 2%;
+  top: 25%;
+  left: 5%;
 }
 .loginPrompt .top-bar .logo {
+  display: flex;
   font-size: 5vh;
+  flex: 1;
 }
 @media screen and (min-width: 570px) {
   .loginPrompt .top-bar *, .loginPrompt .top-bar #close-btn {
@@ -146,10 +157,9 @@ html .no-sel {
 }
 
 .logo {
-  font-family: "Times New Roman", Times, serif;
+  font-weight: 1000;
   font-size: clamp(6vh, 3rem, 20vw);
   color: hsl(90deg, 30%, 73%);
-  font-weight: 650;
   justify-content: center;
 }
 .logo span {
@@ -179,6 +189,7 @@ html .no-sel {
 }
 @media screen and (max-width: 800px) {
   .bottomBar > .flex-container {
+    padding-top: 25vh;
     flex-direction: column;
   }
   .bottomBar > .flex-container button {
@@ -195,11 +206,10 @@ html .no-sel {
        column-gap: 1.5rem;
 }
 .bottomBar > .flex-container input[type=url] {
+  font-family: "Inconsolata", serif;
   height: 3em;
   flex: 1 1 auto;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 0vw min(20vw, 8rem) 0vw min(20vw, 8rem);
+  width: max(40vw, 3rem);
   border-radius: 4em;
   border: 0.1rem solid transparent;
   background-color: hsl(200deg, 25%, 30%);
@@ -210,6 +220,11 @@ html .no-sel {
 .bottomBar > .flex-container input[type=url]:focus {
   border-color: hsl(220deg, 80%, 70%);
   outline: none;
+}
+@media screen and (max-width: 800px) {
+  .bottomBar > .flex-container input[type=url] {
+    width: 80vw;
+  }
 }
 .bottomBar button {
   flex: 1 1 initial;
@@ -222,6 +237,91 @@ html .no-sel {
   border-color: transparent;
   background-color: hsl(200deg, 75%, 60%);
   cursor: pointer;
+}
+@media screen and (max-width: 800px) {
+  .bottomBar button {
+    margin-top: 1em;
+    width: 2.2em;
+    scale: 1.25;
+  }
+}
+
+@keyframes showPopup {
+  0% {
+    transform: translateY(50vh);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes hidePopup {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(50vh);
+  }
+}
+.popup {
+  color: hsl(90deg, 30%, 73%);
+  font-family: "Helvetica", serif;
+  font-size: 0.85em;
+  font-weight: bold;
+  background-color: #172845;
+  padding: 0.5rem 2rem;
+  border: 0.1875rem solid #060b13;
+  border-radius: 1rem;
+  animation: showPopup 1s 1.5s;
+  transition-timing-function: ease-out;
+  animation-fill-mode: both;
+  margin: auto 0.5rem;
+  margin-bottom: 1rem;
+  align-self: center;
+  align-items: center;
+  display: flex;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 95vw;
+  gap: 3vw;
+}
+@media screen and (max-width: 800px) {
+  .popup {
+    padding: 0.5rem 1rem;
+  }
+}
+.popup > * {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.popup .buttons-container {
+  align-self: center;
+  display: flex;
+  gap: 0.55rem;
+}
+.popup .buttons-container button {
+  border-radius: 1.2rem;
+  border: 2px solid black;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75em;
+  font-weight: 600;
+  color: hsl(90deg, 30%, 73%);
+}
+.popup .buttons-container button:nth-of-type(1) {
+  background-color: green;
+}
+.popup .buttons-container button:nth-of-type(1):hover {
+  background-color: rgb(32, 255, 32);
+}
+.popup .buttons-container button:nth-of-type(2) {
+  background-color: rgb(180, 0, 0);
+}
+.popup .buttons-container button:nth-of-type(2):hover {
+  background-color: rgb(255, 16, 16);
+}
+@media screen and (max-width: 800px) {
+  .popup .buttons-container button {
+    font-size: 1.2em;
+  }
 }
 
 /* scrollbar for modern webkit browsers */

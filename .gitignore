@@ -2,3 +2,4 @@
 node_modules/
 */creds/*
 !*/creds/00.db
+ignore/

@@ -10,25 +10,31 @@ var port = 3002;
 
 const idStorage = __dirname+'/creds/';
 var validAuthKeys = new Map([]);
-var authKeyPersistenceMS = 1; // define in mins
+// var authKeyPersistenceMS = 0.5; // 1min for local debugging
+var authKeyPersistenceMS = 15; // define in mins
 authKeyPersistenceMS *= 60*1000; // convert mins to ms for functions
 
 // parsers for post data
 var UE_Parser = bodyParser.urlencoded({extended: false});
 var jsonParser = bodyParser.json();
 
+// get all stored IDs
 let IDs = id.getIDs(idStorage);
+
+/* CORS and ID logging disabled for production
+
 IDs.forEach(element => {
-    console.log(element);
+    console.log(element);  // DEBUG LOGGING: SHOW ALL PROFILES
 });
 
 
-
 function CORS(res) {
-    // res.header("Access-Control-Allow-Origin", "*");
-    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    return 0; // disabled for production
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    return 0; 
 }
+*/
+function CORS() {return 0;} // fake CORS function for production
 
 // attempt to login
 app.post(`/login`, UE_Parser, async (req, res) => {
@@ -78,6 +84,9 @@ app.post(`/register`, UE_Parser, async (req, res) => {
         fs.writeFile(`${idStorage}${user}.db`, JSON.stringify(json), 'utf8', (err)=>{
             if (err) throw err;
             console.log(`User created: ${user}`);
+            res.statusCode = 200;
+            let userAuthKey = createKey(user);
+            res.send(userAuthKey);
         });
 
     } else res.sendStatus(409);
@@ -112,6 +121,7 @@ app.get(`/api/links/:key`, (req,res) =>{
         // get contents of user db file and parse and return to client as json string
         let fileData = fs.readFileSync(userDbFile, {encoding:'utf8', flag:'r'});
         let userLinks = JSON.parse(fileData).links;
+        // console.log(userLinks);
         updateKeyExpiry(clientKey);
         res.status(200).json({links:userLinks});
     } else {
@@ -132,11 +142,11 @@ app.post(`/api/links/update/:key`, UE_Parser, (req,res)=>{
         // pull updated links from request body
         let b = req.body;
         let links = b.links;
-        console.log(b.links);
+        // console.log(`updated links: ${links}`);
         let userPath = idStorage+relativeUser+'.db';
         fs.readFile(userPath, 'utf8', (err,data)=> {
             if (err) throw err;
-            let json = JSON.stringify({pwh: JSON.parse(data).pwh, links: links});
+            let json = JSON.stringify({pwh: JSON.parse(data).pwh, links: JSON.parse(links)});
             let writer = fs.createWriteStream(userPath, {flags: 'w'});
             writer.write(json);
             updateKeyExpiry(clientKey);
@@ -161,7 +171,7 @@ function createKey(username) {
 
 // remove auth key from list
 function removeKey(key) {
-    console.log(`${key} removed`);
+    // console.log(`${key} removed`);  // DEBUG LOGGING
     return validAuthKeys.delete(key);
 }
 
@@ -186,5 +196,5 @@ function updateKeyExpiry(key) {
     clearTimeout(keyExpiry);
     let time = setTimeout(()=>{removeKey(key);}, authKeyPersistenceMS);
     validAuthKeys.get(key).expiryTimer = time;
-    console.log(`${key} updated`);
+    // console.log(`${key} updated`); // DEBUG LOGGING
 }

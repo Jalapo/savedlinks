@@ -3,11 +3,12 @@
 function getLinksFromDB(id = "00", array = [], callback = null) {     // gather links from specific .db file
     getFile(id, "json")
         .then((response) => {
-            console.log(JSON.parse(response));
-            const userdb = JSON.parse(JSON.parse(response).links);
-            console.log(userdb[4]);
+            // console.log(response.links);
+            let linksString = response.links; // gets json string from response 
+            let userdb = linksString;
             for (let i = 0; i < userdb.length; i++) {
                 array.push(userdb[i]);
+                // console.log(array);
             }
             if (callback !== null) {
                 callback();
@@ -20,16 +21,16 @@ function getLinksFromDB(id = "00", array = [], callback = null) {     // gather 
 
 }
 
-async function getFile(key, type="text", finish) { // fetches file
-    // let location = 'http://127.0.0.1:3002/api/links/';
-    let location = '/api/links/';
+async function getFile(key, type="json", finish) { // fetches file from node server
+    let location = `${domain}api/links/`;  // defined in initvars.js
 
     let userdata = await fetch(`${location}${key}`, {method:"GET"});
-    if (userdata.status == 409) {setTimeout(window.open('./init.html','_self'),30); throw null;}
+    // if key does not exist, return user to default page
+    if (userdata.status == 409) {setTimeout(reactRender("default"), 30); throw null;}
     // create an empty string and push all string buffers inputs (each character) into it
     let s = '';
     return new Promise((resolve,rej)=>{
-        userdata.text().then( (fulfilled) => {
+        userdata.json().then( (fulfilled) => {
             // return file data
             resolve(fulfilled);
         });
